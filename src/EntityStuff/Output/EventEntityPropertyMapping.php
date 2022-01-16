@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\EntityStuff\Output;
 
-class PropertyAssignment
+class EventEntityPropertyMapping
 {
     /**
      * @var Property
@@ -21,7 +21,7 @@ class PropertyAssignment
     public static function with(
         Property $entityProperty,
         Property $eventProperty
-    ): PropertyAssignment {
+    ): EventEntityPropertyMapping {
         $self = new static();
 
         $self->entityProperty = $entityProperty;

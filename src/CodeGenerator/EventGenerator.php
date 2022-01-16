@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EsRadAppGeneratorGenerator\CodeGenerator;
+namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGeneratorGenerator\EntityStuff\Output\Event;
+use EsRadAppGenerator\EntityStuff\Output\Event;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;

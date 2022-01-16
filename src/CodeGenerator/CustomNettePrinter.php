@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace EsRadAppGeneratorGenerator\CodeGenerator;
+namespace EsRadAppGenerator\CodeGenerator;
 
 use Nette\PhpGenerator\Printer;
 

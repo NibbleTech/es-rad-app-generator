@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EsRadAppGeneratorGenerator\CodeGenerator;
+namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGeneratorGenerator\EntityStuff\Output\Entity;
+use EsRadAppGenerator\EntityStuff\Output\Entity;
 use Nette\PhpGenerator\PhpFile;
 
 class EntityGenerator

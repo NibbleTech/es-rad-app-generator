@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\EntityStuff\Output\SideEffect;
-use EsRadAppGenerator\Lexer\Tokens\T_Crud_Action;
+use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
+use EsRadAppGenerator\EntityStuff\Output\SideEffects\Creation;
+use EsRadAppGenerator\EntityStuff\Output\SideEffects\Deletion;
+use EsRadAppGenerator\EntityStuff\Output\SideEffects\Update;
 
 /**
  * Generates CRUD-y code for side effects that go into an event listener
@@ -17,23 +19,19 @@ class SideEffectCrudCodeGenerator
 
     public function generate(SideEffect $sideEffect): string
     {
-        switch ($sideEffect->getAction()) {
-            case SideEffect::CREATE:
+        switch (get_class($sideEffect)) {
+            case Creation::class:
                 return $this->createCode($sideEffect);
-                break;
-            case SideEffect::UPDATE:
+            case Update::class:
                 return $this->updateCode($sideEffect);
-                break;
-            case SideEffect::DELETE:
+            case Deletion::class:
                 return $this->deleteCode($sideEffect);
-                break;
             default:
                 throw new \InvalidArgumentException("Unsupported SideEffect action type.");
-                break;
         }
     }
 
-    private function createCode(SideEffect $sideEffect): string
+    private function createCode(Creation $sideEffect): string
     {
         $entityVariableName = $this->getEntityVariableName($sideEffect);
         $entityRepoShortName = $this->getEntityRepositoryShortClassName($sideEffect);
@@ -42,8 +40,8 @@ class SideEffectCrudCodeGenerator
 
         $code = "\$$entityVariableName = new $class();" . PHP_EOL;
 
-        foreach ($sideEffect->getPropertyAssignments() as $propertyAssignment) {
-            $code .= "\$$entityVariableName->{$propertyAssignment->getEntityProperty()->getName()} = \$event->{$propertyAssignment->getEventProperty()->getName()};" . PHP_EOL;
+        foreach ($sideEffect->getPropertyMappings() as $propertyMapping) {
+            $code .= "\$$entityVariableName->{$propertyMapping->getEntityProperty()->getName()} = \$event->{$propertyMapping->getEventProperty()->getName()};" . PHP_EOL;
         }
 
         $code .= "\$this->{$entityRepoShortName}->persist(\$$entityVariableName);" . PHP_EOL;
@@ -51,7 +49,7 @@ class SideEffectCrudCodeGenerator
         return $code;
     }
 
-    private function updateCode(SideEffect $sideEffect): string
+    private function updateCode(Update $sideEffect): string
     {
         $entityVariableName = $this->getEntityVariableName($sideEffect);
         $entityRepoShortName = $this->getEntityRepositoryShortClassName($sideEffect);
@@ -59,9 +57,9 @@ class SideEffectCrudCodeGenerator
         $repoProperty = "\$this->" . lcfirst($sideEffect->getEntityClass()) . 'Repository';
 
         $array = "[" . PHP_EOL;
-        foreach ($sideEffect->getPropertyAssignments() as $propertyAssignment) {
-            $arrayItem = "\t'" . $propertyAssignment->getEntityProperty()->getName() . "'" . ' => '
-                . '$event->get' . ucfirst($propertyAssignment->getEventProperty()->getName()) . '(),' . PHP_EOL;
+        foreach ($sideEffect->getPropertyMappings() as $propertyMapping) {
+            $arrayItem = "\t'" . $propertyMapping->getEntityProperty()->getName() . "'" . ' => '
+                . '$event->get' . ucfirst($propertyMapping->getEventProperty()->getName()) . '(),' . PHP_EOL;
             $array .= $arrayItem;
         }
         $array .= "]";
@@ -70,8 +68,8 @@ class SideEffectCrudCodeGenerator
 
         $code .= "\$$entityVariableName = " . $repoProperty . '->findBy(' . $array . ');' . PHP_EOL;
 
-        foreach ($sideEffect->getPropertyAssignments() as $propertyAssignment) {
-            $code .= "\$$entityVariableName->{$propertyAssignment->getEntityProperty()->getName()} = \$event->{$propertyAssignment->getEventProperty()->getName()};" . PHP_EOL;
+        foreach ($sideEffect->getPropertyMappings() as $propertyMapping) {
+            $code .= "\$$entityVariableName->{$propertyMapping->getEntityProperty()->getName()} = \$event->{$propertyMapping->getEventProperty()->getName()};" . PHP_EOL;
         }
 
         $code .= "\$this->{$entityRepoShortName}->persist(\$$entityVariableName);" . PHP_EOL;
@@ -79,7 +77,7 @@ class SideEffectCrudCodeGenerator
         return $code;
     }
 
-    private function deleteCode(SideEffect $sideEffect): string
+    private function deleteCode(Deletion $sideEffect): string
     {
         $entityVariableName = $this->getEntityVariableName($sideEffect);
         $entityRepoShortName = $this->getEntityRepositoryShortClassName($sideEffect);
@@ -87,9 +85,9 @@ class SideEffectCrudCodeGenerator
         $repoProperty = "\$this->" . $entityRepoShortName;
 
         $array = "[" . PHP_EOL;
-        foreach ($sideEffect->getPropertyAssignments() as $propertyAssignment) {
-            $arrayItem = "\t'" . $propertyAssignment->getEntityProperty()->getName() . "'" . ' => '
-                . '$event->get' . ucfirst($propertyAssignment->getEventProperty()->getName()) . '(),' . PHP_EOL;
+        foreach ($sideEffect->getPropertyMappings() as $propertyMapping) {
+            $arrayItem = "\t'" . $propertyMapping->getEntityProperty()->getName() . "'" . ' => '
+                . '$event->get' . ucfirst($propertyMapping->getEventProperty()->getName()) . '(),' . PHP_EOL;
             $array .= $arrayItem;
         }
         $array .= "]";
@@ -111,14 +109,14 @@ class SideEffectCrudCodeGenerator
         $shortClass = array_reverse(explode('\\', $sideEffect->getEntityClass()))[0];
         $variableName .= $shortClass;
         
-        switch ($sideEffect->getAction()) {
-            case SideEffect::CREATE:
+        switch (get_class($sideEffect)) {
+            case Creation::class:
                 $variableName .= 'ForCreation';
                 break;
-            case SideEffect::UPDATE:
+            case Update::class:
                 $variableName .= 'ForUpdate';
                 break;
-            case SideEffect::DELETE:
+            case Deletion::class:
                 $variableName .= 'ForDeletion';
                 break;
             default:

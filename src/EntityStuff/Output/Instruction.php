@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\EntityStuff\Output;
 
+use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
+
 class Instruction
 {
-    /**
-     * @var string
-     */
-    private $filepath;
     /**
      * @var string
      */
@@ -31,16 +29,14 @@ class Instruction
     }
 
     /**
-     * @param string       $filepath
-     * @param string       $name
-     * @param Event        $event
-     * @param Entity[]     $entities
+     * @param string                 $name
+     * @param Event                  $event
+     * @param Entity[]               $entities
      * @param SideEffect[] $sideEffects
      *
      * @return Instruction
      */
     public static function new(
-        string $filepath,
         string $name,
         Event $event,
         array $entities,
@@ -48,18 +44,12 @@ class Instruction
     ): Instruction {
         $self = new static();
 
-        $self->filepath    = $filepath;
         $self->name        = $name;
         $self->event       = $event;
         $self->entities    = $entities;
         $self->sideEffects = $sideEffects;
 
         return $self;
-    }
-
-    public function getFilepath(): string
-    {
-        return $this->filepath;
     }
 
     public function getName(): string

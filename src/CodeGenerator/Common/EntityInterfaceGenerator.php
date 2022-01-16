@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace EsRadAppGeneratorGenerator\CodeGenerator\Common;
+namespace EsRadAppGenerator\CodeGenerator\Common;
 
-use EsRadAppGeneratorGenerator\CodeGenerator\CustomNettePrinter;
+use EsRadAppGenerator\CodeGenerator\CustomNettePrinter;
 use Nette\PhpGenerator\PhpFile;
 
 class EntityInterfaceGenerator
@@ -20,7 +20,7 @@ class EntityInterfaceGenerator
 
         $namespace = $file->addNamespace('App\Common');
 
-        $class = $namespace->addInterface('Entity');
+        $namespace->addInterface('Entity');
         
         return (new CustomNettePrinter())->printFile($file);
     }

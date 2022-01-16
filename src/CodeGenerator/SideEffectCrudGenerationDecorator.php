@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\EntityStuff\Output\SideEffect;
-use EsRadAppGenerator\Lexer\Tokens\T_Crud_Action;
+use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\PhpNamespace;

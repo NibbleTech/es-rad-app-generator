@@ -4,17 +4,17 @@ declare(strict_types=1);
 namespace EsRadAppGenerator;
 
 
-use EsRadAppGeneratorGenerator\CodeGenerator\Common\EntityInterfaceGenerator;
-use EsRadAppGeneratorGenerator\CodeGenerator\Common\EventInterfaceGenerator;
-use EsRadAppGeneratorGenerator\CodeGenerator\Common\EventListenerInterfaceGenerator;
-use EsRadAppGeneratorGenerator\CodeGenerator\EntityGenerator;
-use EsRadAppGeneratorGenerator\CodeGenerator\EventGenerator;
-use EsRadAppGeneratorGenerator\CodeGenerator\ListenerGenerator;
-use EsRadAppGeneratorGenerator\CodeGenerator\RepositoryGenerator;
-use EsRadAppGeneratorGenerator\CodeGenerator\SideEffectCrudCodeGenerator;
-use EsRadAppGeneratorGenerator\EntityStuff\Output\Entity;
-use EsRadAppGeneratorGenerator\EntityStuff\Output\Event;
-use EsRadAppGeneratorGenerator\EntityStuff\Output\Instruction;
+use EsRadAppGenerator\CodeGenerator\Common\EntityInterfaceGenerator;
+use EsRadAppGenerator\CodeGenerator\Common\EventInterfaceGenerator;
+use EsRadAppGenerator\CodeGenerator\Common\EventListenerInterfaceGenerator;
+use EsRadAppGenerator\CodeGenerator\EntityGenerator;
+use EsRadAppGenerator\CodeGenerator\EventGenerator;
+use EsRadAppGenerator\CodeGenerator\ListenerGenerator;
+use EsRadAppGenerator\CodeGenerator\RepositoryGenerator;
+use EsRadAppGenerator\CodeGenerator\SideEffectCrudCodeGenerator;
+use EsRadAppGenerator\EntityStuff\Output\Entity;
+use EsRadAppGenerator\EntityStuff\Output\Event;
+use EsRadAppGenerator\EntityStuff\Output\Instruction;
 
 class AppBuilder
 {
