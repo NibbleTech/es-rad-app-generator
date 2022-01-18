@@ -20,7 +20,7 @@ use EsRadAppGenerator\EntityStuff\Output\Entity;
 use EsRadAppGenerator\EntityStuff\Output\Event;
 use EsRadAppGenerator\EntityStuff\Output\Instruction;
 
-class AppBuilder
+final class AppBuilder
 {
     private string $buildDir;
     private EventGenerator $eventGenerator;

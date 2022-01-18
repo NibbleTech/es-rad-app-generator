@@ -7,7 +7,7 @@ namespace EsRadAppGenerator\CodeGenerator;
 use EsRadAppGenerator\EntityStuff\Output\Entity;
 use Nette\PhpGenerator\PhpFile;
 
-class EntityGenerator
+final class EntityGenerator
 {
     final public function __construct()
     {

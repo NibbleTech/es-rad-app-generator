@@ -6,7 +6,7 @@ namespace EsRadAppGenerator\EntityStuff\Output;
 
 use InvalidArgumentException;
 
-class Entity
+final class Entity
 {
     private string $class;
     private PropertyCollection $properties;

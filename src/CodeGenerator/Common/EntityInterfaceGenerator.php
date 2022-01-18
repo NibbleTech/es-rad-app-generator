@@ -7,7 +7,7 @@ namespace EsRadAppGenerator\CodeGenerator\Common;
 use EsRadAppGenerator\CodeGenerator\CustomNettePrinter;
 use Nette\PhpGenerator\PhpFile;
 
-class EntityInterfaceGenerator
+final class EntityInterfaceGenerator
 {
     final public function __construct()
     {

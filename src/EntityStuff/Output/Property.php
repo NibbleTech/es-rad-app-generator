@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\EntityStuff\Output;
 
-class Property
+final class Property
 {
     private string $name;
     private string $type;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\EntityStuff\Output;
 
-class PropertyCollection
+final class PropertyCollection
 {
     /**
      * @var Property[]

@@ -13,7 +13,7 @@ use EsRadAppGenerator\EntityStuff\Output\SideEffects\Update;
 /**
  * Generates CRUD-y code for side effects that go into an event listener
  */
-class SideEffectCrudCodeGenerator
+final class SideEffectCrudCodeGenerator
 {
     final public function __construct()
     {

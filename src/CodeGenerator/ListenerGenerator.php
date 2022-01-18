@@ -7,7 +7,7 @@ namespace EsRadAppGenerator\CodeGenerator;
 use EsRadAppGenerator\EntityStuff\Output\Instruction;
 use Nette\PhpGenerator\PhpFile;
 
-class ListenerGenerator
+final class ListenerGenerator
 {
     private SideEffectCrudCodeGenerator $sideEffectCrudCodeGenerator;
 

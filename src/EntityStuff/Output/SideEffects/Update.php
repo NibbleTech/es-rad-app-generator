@@ -6,7 +6,7 @@ namespace EsRadAppGenerator\EntityStuff\Output\SideEffects;
 
 use EsRadAppGenerator\EntityStuff\Output\EventEntityPropertyMapping;
 
-class Update implements SideEffect
+final class Update implements SideEffect
 {
     private string $entityClass;
 

@@ -6,7 +6,7 @@ namespace EsRadAppGenerator\EntityStuff\Output\SideEffects;
 
 use EsRadAppGenerator\EntityStuff\Output\EventEntityPropertyMapping;
 
-class Deletion implements SideEffect
+final class Deletion implements SideEffect
 {
     private string $entityClass;
 

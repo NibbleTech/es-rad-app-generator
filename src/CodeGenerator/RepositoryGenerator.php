@@ -8,7 +8,7 @@ use EsRadAppGenerator\EntityStuff\Output\Entity;
 use Nette\PhpGenerator\PhpFile;
 use Ramsey\Uuid\UuidInterface;
 
-class RepositoryGenerator
+final class RepositoryGenerator
 {
     final public function __construct()
     {

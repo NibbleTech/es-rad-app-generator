@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\EntityStuff\Output;
 
-class EventEntityPropertyMapping
+final class EventEntityPropertyMapping
 {
     private Property $entityProperty;
     private Property $eventProperty;

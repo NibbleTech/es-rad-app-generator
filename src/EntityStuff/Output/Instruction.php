@@ -6,7 +6,7 @@ namespace EsRadAppGenerator\EntityStuff\Output;
 
 use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
 
-class Instruction
+final class Instruction
 {
     private string $name;
     private Event $event;

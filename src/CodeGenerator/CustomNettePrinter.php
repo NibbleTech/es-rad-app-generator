@@ -6,7 +6,7 @@ namespace EsRadAppGenerator\CodeGenerator;
 
 use Nette\PhpGenerator\Printer;
 
-class CustomNettePrinter extends Printer
+final class CustomNettePrinter extends Printer
 {
     protected $indentation = "    ";
     protected $linesBetweenProperties = 0;

@@ -12,7 +12,7 @@ use Nette\PhpGenerator\PhpNamespace;
 /**
  * Adds all the relevant things to the Nette\PhpGenerator components given
  */
-class SideEffectCrudGenerationDecorator
+final class SideEffectCrudGenerationDecorator
 {
     private SideEffectCrudCodeGenerator $handleMethodCodeGenerator;
     private PhpNamespace $namespace;
