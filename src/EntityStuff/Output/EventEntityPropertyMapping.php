@@ -17,7 +17,7 @@ final class EventEntityPropertyMapping
         Property $entityProperty,
         Property $eventProperty
     ): EventEntityPropertyMapping {
-        $self = new static();
+        $self = new self();
 
         $self->entityProperty = $entityProperty;
         $self->eventProperty  = $eventProperty;

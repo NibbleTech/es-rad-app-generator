@@ -31,7 +31,7 @@ final class SideEffectCrudGenerationDecorator
         Method $constructorMethod,
         Method $handleMethod
     ): SideEffectCrudGenerationDecorator {
-        $self = new static();
+        $self = new self();
 
         $self->handleMethodCodeGenerator = $handleMethodCodeGenerator;
         $self->namespace = $namespace;

@@ -16,7 +16,7 @@ final class Property
     public static function new(
         string $name
     ): Property {
-        $self = new static();
+        $self = new self();
 
         $self->name = $name;
 

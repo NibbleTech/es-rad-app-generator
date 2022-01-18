@@ -19,7 +19,7 @@ final class Event
         string $class,
         ?PropertyCollection $propertyCollection = null
     ): Event {
-        $self = new static();
+        $self = new self();
 
         $self->class = $class;
         $self->properties = $propertyCollection ?? PropertyCollection::with([]);

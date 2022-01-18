@@ -19,7 +19,7 @@ final class Entity
         string $class,
         PropertyCollection $properties
     ): Entity {
-        $self = new static();
+        $self = new self();
 
         $self->class = $class;
         $self->properties = $properties;

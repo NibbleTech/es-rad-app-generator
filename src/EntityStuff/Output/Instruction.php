@@ -34,7 +34,7 @@ final class Instruction
         array $entities,
         array $sideEffects
     ): Instruction {
-        $self = new static();
+        $self = new self();
 
         $self->name        = $name;
         $self->event       = $event;

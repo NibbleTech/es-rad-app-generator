@@ -20,7 +20,7 @@ final class PropertyCollection
      */
     public static function with(array $properties): PropertyCollection
     {
-        $self = new static();
+        $self = new self();
 
         foreach ($properties as $property) {
             $self->properties[$property->getName()] = $property;

@@ -27,7 +27,7 @@ final class Creation implements SideEffect
         string $entityClass,
         array $propertyMappings = []
     ): self {
-        $self = new static();
+        $self = new self();
 
         $self->entityClass      = $entityClass;
         $self->propertyMappings = $propertyMappings;
