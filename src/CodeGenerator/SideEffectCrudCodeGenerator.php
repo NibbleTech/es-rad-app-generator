@@ -62,9 +62,7 @@ final class SideEffectCrudCodeGenerator
         }
         $array .= "]";
 
-        $code = '';
-
-        $code .= "\$$entityVariableName = " . $repoProperty . '->findBy(' . $array . ');' . PHP_EOL;
+        $code = "\$$entityVariableName = " . $repoProperty . '->findBy(' . $array . ');' . PHP_EOL;
 
         foreach ($sideEffect->getPropertyMappings() as $propertyMapping) {
             $code .= "\$$entityVariableName->{$propertyMapping->getEntityProperty()->getName()} = \$event->{$propertyMapping->getEventProperty()->getName()};" . PHP_EOL;
@@ -90,16 +88,14 @@ final class SideEffectCrudCodeGenerator
         }
         $array .= "]";
 
-        $code = '';
-
-        $code .= "\$$entityVariableName = " . $repoProperty . '->findBy(' . $array . ');' . PHP_EOL;
+        $code = "\$$entityVariableName = " . $repoProperty . '->findBy(' . $array . ');' . PHP_EOL;
 
         $code .= $repoProperty . "->delete(\$$entityVariableName);" . PHP_EOL;
 
         return $code;
     }
 
-    public function getEntityVariableName(
+    private function getEntityVariableName(
         SideEffect $sideEffect
     ): string {
         $variableName = 'entity';
@@ -124,7 +120,7 @@ final class SideEffectCrudCodeGenerator
         return $variableName;
     }
 
-    public function getEntityRepositoryShortClassName(
+    private function getEntityRepositoryShortClassName(
         SideEffect $sideEffect
     ): string {
         return lcfirst($sideEffect->getEntityClass()) . 'Repository';
