@@ -100,7 +100,7 @@ final class SideEffectCrudCodeGenerator
     ): string {
         $variableName = 'entity';
 
-        $shortClass = array_reverse(explode('\\', $sideEffect->getEntityClass()))[0];
+        $shortClass = $this->getShortClass($sideEffect->getEntityClass());
         $variableName .= $shortClass;
 
         switch ($sideEffect::class) {
@@ -123,6 +123,11 @@ final class SideEffectCrudCodeGenerator
     private function getEntityRepositoryShortClassName(
         SideEffect $sideEffect
     ): string {
-        return lcfirst($sideEffect->getEntityClass()) . 'Repository';
+        return lcfirst($this->getShortClass($sideEffect->getEntityClass())) . 'Repository';
+    }
+
+    private function getShortClass(string $fqcn): string
+    {
+        return array_reverse(explode('\\', $fqcn))[0];
     }
 }
