@@ -3,18 +3,18 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\EntityStuff\Output\Event;
+use EsRadAppGenerator\EntityStuff\Output\Entity;
 use EsRadAppGenerator\EntityStuff\Output\Property;
 use EsRadAppGenerator\EntityStuff\Output\PropertyCollection;
 use PHPUnit\Framework\TestCase;
 
-class EventGeneratorTest extends TestCase
+class EntityGeneratorTest extends TestCase
 {
-    private EventGenerator $eventGenerator;
+    private EntityGenerator $entityGenerator;
     
     protected function setUp(): void
     {
-        $this->eventGenerator = new EventGenerator();
+        $this->entityGenerator = new EntityGenerator();
     }
 
     function test_it_generates_code_for_event()
@@ -24,19 +24,20 @@ class EventGeneratorTest extends TestCase
 
 declare(strict_types=1);
 
-namespace App\Events;
+namespace App\Entities;
 
-use App\Common\Event;
+use App\Common\Entity;
 
-class Test implements Event
+class Test implements Entity
 {
     public \$foo;
     public \$bar;
 }
 
 php;
+        $entityGenerator = new EntityGenerator();
 
-        $event = Event::new(
+        $event = Entity::new(
             'Test',
             PropertyCollection::with([
                 Property::new('foo'),
@@ -44,7 +45,7 @@ php;
             ])
         );
 
-        $code = $this->eventGenerator->generate($event);
+        $code = $this->entityGenerator->generate($event);
 
         $this->assertEquals($expected, $code);
 
