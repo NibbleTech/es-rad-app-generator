@@ -3,18 +3,13 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\EntityStuff\Output;
 
+use InvalidArgumentException;
 class Event
 {
-    /**
-     * @var string
-     */
-    private $class;
-    /**
-     * @var PropertyCollection
-     */
-    private $properties;
+    private string $class;
+    private PropertyCollection $properties;
     
-    final private function __construct()
+    private function __construct()
     {
     }
     
@@ -33,7 +28,7 @@ class Event
     public function merge(Event $event): void
     {
         if ($event->getClass() !== $this->getClass()) {
-            throw new \InvalidArgumentException("Trying to merge Event set as different class.");
+            throw new InvalidArgumentException("Trying to merge Event set as different class.");
         }
         
         $this->properties->mergeProperties($event->getProperties());

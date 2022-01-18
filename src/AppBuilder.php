@@ -4,6 +4,10 @@ declare(strict_types=1);
 namespace EsRadAppGenerator;
 
 
+use RecursiveDirectoryIterator;
+use FilesystemIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
 use EsRadAppGenerator\CodeGenerator\Common\EntityInterfaceGenerator;
 use EsRadAppGenerator\CodeGenerator\Common\EventInterfaceGenerator;
 use EsRadAppGenerator\CodeGenerator\Common\EventListenerInterfaceGenerator;
@@ -18,34 +22,22 @@ use EsRadAppGenerator\EntityStuff\Output\Instruction;
 
 class AppBuilder
 {
-    /**
-     * @var string
-     */
-    private $buildDir;
-    /**
-     * @var EventGenerator
-     */
-    private $eventGenerator;
-    /**
-     * @var EntityGenerator
-     */
-    private $entityGenerator;
-    /**
-     * @var RepositoryGenerator
-     */
-    private $repoGenerator;
+    private string $buildDir;
+    private EventGenerator $eventGenerator;
+    private EntityGenerator $entityGenerator;
+    private RepositoryGenerator $repoGenerator;
     /**
      * @var Instruction[]
      */
-    private $instructions = [];
+    private array $instructions = [];
     /**
      * @var array<string, Event>
      */
-    private $globalEvents = [];
+    private array $globalEvents = [];
     /**
      * @var array<string, Entity>
      */
-    private $globalEntities = [];
+    private array $globalEntities = [];
 
     final public function __construct(
         string $buildDir
@@ -80,9 +72,9 @@ class AppBuilder
     {
         echo 'Clearing build dir' . PHP_EOL;
         $dir = $this->buildDir;
-        $di  = new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS);
-        $ri  = new \RecursiveIteratorIterator($di, \RecursiveIteratorIterator::CHILD_FIRST);
-        /** @var \SplFileInfo $file */
+        $di  = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+        $ri  = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
+        /** @var SplFileInfo $file */
         foreach ($ri as $file) {
             $file->isDir() ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
         }

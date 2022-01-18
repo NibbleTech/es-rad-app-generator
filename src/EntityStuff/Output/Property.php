@@ -5,16 +5,10 @@ namespace EsRadAppGenerator\EntityStuff\Output;
 
 class Property
 {
-    /**
-     * @var string
-     */
-    private $name;
-    /**
-     * @var string
-     */
-    private $type;
+    private string $name;
+    private string $type;
     
-    final private function __construct()
+    private function __construct()
     {
     }
     

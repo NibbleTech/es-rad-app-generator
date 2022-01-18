@@ -15,15 +15,13 @@ class Creation implements SideEffect
      */
     private array $propertyMappings = [];
 
-    final private function __construct()
+    private function __construct()
     {
     }
 
     /**
-     * @param string                       $entityClass
      * @param EventEntityPropertyMapping[] $propertyMappings
      *
-     * @return static
      */
     public static function forEntityClass(
         string $entityClass,

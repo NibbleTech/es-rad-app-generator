@@ -5,16 +5,10 @@ namespace EsRadAppGenerator\EntityStuff\Output;
 
 class EventEntityPropertyMapping
 {
-    /**
-     * @var Property
-     */
-    private $entityProperty;
-    /**
-     * @var Property
-     */
-    private $eventProperty;
+    private Property $entityProperty;
+    private Property $eventProperty;
 
-    final private function __construct()
+    private function __construct()
     {
     }
 

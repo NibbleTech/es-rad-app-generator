@@ -8,16 +8,14 @@ class PropertyCollection
     /**
      * @var Property[]
      */
-    private $properties = [];
+    private array $properties = [];
     
-    final private function __construct()
+    private function __construct()
     {
     }
 
     /**
      * @param Property[] $properties
-     *
-     * @return PropertyCollection
      */
     public static function with(array $properties): PropertyCollection
     {

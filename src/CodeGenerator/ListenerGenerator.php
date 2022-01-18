@@ -8,10 +8,7 @@ use Nette\PhpGenerator\PhpFile;
 
 class ListenerGenerator
 {
-    /**
-     * @var SideEffectCrudCodeGenerator
-     */
-    private $sideEffectCrudCodeGenerator;
+    private SideEffectCrudCodeGenerator $sideEffectCrudCodeGenerator;
 
     final public function __construct(
         SideEffectCrudCodeGenerator $sideEffectCrudCodeGenerator

@@ -7,34 +7,25 @@ use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
 
 class Instruction
 {
-    /**
-     * @var string
-     */
-    private $name;
-    /**
-     * @var Event
-     */
-    private $event;
+    private string $name;
+    private Event $event;
     /**
      * @var Entity[]
      */
-    private $entities = [];
+    private array $entities = [];
     /**
      * @var SideEffect[]
      */
-    private $sideEffects = [];
+    private array $sideEffects = [];
 
-    final private function __construct()
+    private function __construct()
     {
     }
 
     /**
-     * @param string                 $name
-     * @param Event                  $event
      * @param Entity[]               $entities
      * @param SideEffect[] $sideEffects
      *
-     * @return Instruction
      */
     public static function new(
         string $name,

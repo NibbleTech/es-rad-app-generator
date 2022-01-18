@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
+use InvalidArgumentException;
 use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
 use EsRadAppGenerator\EntityStuff\Output\SideEffects\Creation;
 use EsRadAppGenerator\EntityStuff\Output\SideEffects\Deletion;
@@ -19,16 +20,12 @@ class SideEffectCrudCodeGenerator
 
     public function generate(SideEffect $sideEffect): string
     {
-        switch (get_class($sideEffect)) {
-            case Creation::class:
-                return $this->createCode($sideEffect);
-            case Update::class:
-                return $this->updateCode($sideEffect);
-            case Deletion::class:
-                return $this->deleteCode($sideEffect);
-            default:
-                throw new \InvalidArgumentException("Unsupported SideEffect action type.");
-        }
+        return match ($sideEffect::class) {
+            Creation::class => $this->createCode($sideEffect),
+            Update::class => $this->updateCode($sideEffect),
+            Deletion::class => $this->deleteCode($sideEffect),
+            default => throw new InvalidArgumentException("Unsupported SideEffect action type."),
+        };
     }
 
     private function createCode(Creation $sideEffect): string
@@ -109,7 +106,7 @@ class SideEffectCrudCodeGenerator
         $shortClass = array_reverse(explode('\\', $sideEffect->getEntityClass()))[0];
         $variableName .= $shortClass;
         
-        switch (get_class($sideEffect)) {
+        switch ($sideEffect::class) {
             case Creation::class:
                 $variableName .= 'ForCreation';
                 break;
@@ -120,7 +117,7 @@ class SideEffectCrudCodeGenerator
                 $variableName .= 'ForDeletion';
                 break;
             default:
-                throw new \InvalidArgumentException("Unsupported SideEffect action type.");
+                throw new InvalidArgumentException("Unsupported SideEffect action type.");
         }
         
         return $variableName;

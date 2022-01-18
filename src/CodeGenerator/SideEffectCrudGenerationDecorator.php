@@ -13,26 +13,11 @@ use Nette\PhpGenerator\PhpNamespace;
  */
 class SideEffectCrudGenerationDecorator
 {
-    /**
-     * @var SideEffectCrudCodeGenerator
-     */
-    private $handleMethodCodeGenerator;
-    /**
-     * @var PhpNamespace
-     */
-    private $namespace;
-    /**
-     * @var ClassType
-     */
-    private $class;
-    /**
-     * @var Method
-     */
-    private $constructorMethod;
-    /**
-     * @var Method
-     */
-    private $handleMethod;
+    private SideEffectCrudCodeGenerator $handleMethodCodeGenerator;
+    private PhpNamespace $namespace;
+    private ClassType $class;
+    private Method $constructorMethod;
+    private Method $handleMethod;
     
     final public function __construct()
     {
