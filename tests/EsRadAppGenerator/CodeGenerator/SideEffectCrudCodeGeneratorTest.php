@@ -24,14 +24,14 @@ class SideEffectCrudCodeGeneratorTest extends TestCase
     function test_it_generates_create_code()
     {
         $expected = <<<php
-\$entityTestForCreation = new Test();
+\$entityTestForCreation = new Foo\Test();
 \$entityTestForCreation->foo = \$event->bar;
 \$this->testRepository->persist(\$entityTestForCreation);
 
 php;
 
         $sideEffect = Creation::forEntityClass(
-            'Test',
+            'Foo\Test',
             [
                 EventEntityPropertyMapping::with(
                     Property::new('foo'),
