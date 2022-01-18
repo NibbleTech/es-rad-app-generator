@@ -1,3 +1,4 @@
 /vendor/
 .php-cs-fixer*
 .phpunit.cache
+infection.html
