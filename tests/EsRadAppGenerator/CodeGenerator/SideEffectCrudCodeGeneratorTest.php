@@ -34,8 +34,8 @@ php;
             'Foo\Test',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -61,8 +61,8 @@ php;
             'Test',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -87,8 +87,8 @@ php;
             'Test',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );

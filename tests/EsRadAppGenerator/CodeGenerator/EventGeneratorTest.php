@@ -39,8 +39,8 @@ php;
         $event = Event::new(
             'Test',
             PropertyCollection::with([
-                Property::new('foo'),
-                Property::new('bar'),
+                Property::new('foo', 'string'),
+                Property::new('bar', 'string'),
             ])
         );
 

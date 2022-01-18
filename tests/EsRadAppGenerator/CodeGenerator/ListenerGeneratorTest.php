@@ -33,8 +33,8 @@ class ListenerGeneratorTest extends TestCase
             'Test',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -75,8 +75,8 @@ php;
             Event::new(
                 'Test',
                 PropertyCollection::with([
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 ])
             ),
             [],
@@ -96,8 +96,8 @@ php;
             'Test',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -140,8 +140,8 @@ php;
             Event::new(
                 'Test',
                 PropertyCollection::with([
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 ])
             ),
             [],
@@ -161,8 +161,8 @@ php;
             'Test',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -204,8 +204,8 @@ php;
             Event::new(
                 'Test',
                 PropertyCollection::with([
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 ])
             ),
             [],
@@ -225,8 +225,8 @@ php;
             'CreationEntity',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -234,8 +234,8 @@ php;
             'UpdateEntity',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -243,8 +243,8 @@ php;
             'DeleteEntity',
             [
                 EventEntityPropertyMapping::with(
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 )
             ]
         );
@@ -307,8 +307,8 @@ php;
             Event::new(
                 'Test',
                 PropertyCollection::with([
-                    Property::new('foo'),
-                    Property::new('bar'),
+                    Property::new('foo', 'string'),
+                    Property::new('bar', 'string'),
                 ])
             ),
             [],

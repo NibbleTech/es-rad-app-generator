@@ -14,11 +14,13 @@ final class Property
     }
 
     public static function new(
-        string $name
+        string $name,
+        string $type
     ): Property {
         $self = new self();
 
         $self->name = $name;
+        $self->type = $type;
 
         return $self;
     }
