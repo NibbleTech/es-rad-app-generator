@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator\Common;
@@ -21,7 +22,7 @@ class EventListenerInterfaceGenerator
         $namespace = $file->addNamespace('App\Common');
 
         $class = $namespace->addInterface('EventListener');
-        
+
         $class
             ->addMethod('handle')
             ->setPublic();
@@ -33,7 +34,7 @@ class EventListenerInterfaceGenerator
         $handleMethod
             ->addParameter('event')
             ->setType('App\Common\Event');
-        
+
         return (new CustomNettePrinter())->printFile($file);
     }
 }

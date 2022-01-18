@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
@@ -13,19 +14,19 @@ class EventGenerator
     final public function __construct()
     {
     }
-    
+
     public function generate(Event $event): string
     {
         $file = new PhpFile();
         $file
             ->setStrictTypes();
-        
+
         $namespace = $file->addNamespace('App\Events');
-        
+
         $namespace->addUse("App\Common\Event");
-        
+
         $class = $namespace->addClass($event->getClass());
-        
+
         $class
             ->addImplement("App\Common\Event");
 
@@ -34,7 +35,7 @@ class EventGenerator
                 $property->getName()
             );
         }
-        
+
         return (new CustomNettePrinter()) ->printFile($file);
     }
 }

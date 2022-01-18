@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
@@ -32,7 +33,7 @@ class SideEffectCrudCodeGenerator
     {
         $entityVariableName = $this->getEntityVariableName($sideEffect);
         $entityRepoShortName = $this->getEntityRepositoryShortClassName($sideEffect);
-        
+
         $class = $sideEffect->getEntityClass();
 
         $code = "\$$entityVariableName = new $class();" . PHP_EOL;
@@ -50,7 +51,7 @@ class SideEffectCrudCodeGenerator
     {
         $entityVariableName = $this->getEntityVariableName($sideEffect);
         $entityRepoShortName = $this->getEntityRepositoryShortClassName($sideEffect);
-        
+
         $repoProperty = "\$this->" . lcfirst($sideEffect->getEntityClass()) . 'Repository';
 
         $array = "[" . PHP_EOL;
@@ -78,7 +79,7 @@ class SideEffectCrudCodeGenerator
     {
         $entityVariableName = $this->getEntityVariableName($sideEffect);
         $entityRepoShortName = $this->getEntityRepositoryShortClassName($sideEffect);
-        
+
         $repoProperty = "\$this->" . $entityRepoShortName;
 
         $array = "[" . PHP_EOL;
@@ -88,24 +89,24 @@ class SideEffectCrudCodeGenerator
             $array .= $arrayItem;
         }
         $array .= "]";
-        
+
         $code = '';
-        
+
         $code .= "\$$entityVariableName = " . $repoProperty . '->findBy(' . $array . ');' . PHP_EOL;
-        
+
         $code .= $repoProperty . "->delete(\$$entityVariableName);" . PHP_EOL;
 
         return $code;
     }
-    
+
     public function getEntityVariableName(
         SideEffect $sideEffect
     ): string {
         $variableName = 'entity';
-        
+
         $shortClass = array_reverse(explode('\\', $sideEffect->getEntityClass()))[0];
         $variableName .= $shortClass;
-        
+
         switch ($sideEffect::class) {
             case Creation::class:
                 $variableName .= 'ForCreation';
@@ -119,14 +120,13 @@ class SideEffectCrudCodeGenerator
             default:
                 throw new InvalidArgumentException("Unsupported SideEffect action type.");
         }
-        
+
         return $variableName;
     }
-    
+
     public function getEntityRepositoryShortClassName(
         SideEffect $sideEffect
     ): string {
         return lcfirst($sideEffect->getEntityClass()) . 'Repository';
     }
-
 }

@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\EntityStuff\Output;
 
 use InvalidArgumentException;
+
 class Entity
 {
     private string $class;
@@ -12,16 +14,16 @@ class Entity
     private function __construct()
     {
     }
-    
+
     public static function new(
         string $class,
         PropertyCollection $properties
     ): Entity {
         $self = new static();
-        
+
         $self->class = $class;
         $self->properties = $properties;
-        
+
         return $self;
     }
 

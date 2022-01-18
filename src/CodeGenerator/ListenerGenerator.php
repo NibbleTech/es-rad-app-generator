@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
@@ -18,7 +19,6 @@ class ListenerGenerator
 
     public function generate(Instruction $instruction): string
     {
-
         $file = new PhpFile();
         $file
             ->setStrictTypes();
@@ -39,8 +39,8 @@ class ListenerGenerator
         $handleMethod = $class
             ->addMethod('handle')
             ->setReturnType('void');
-        
-        
+
+
         $sideEffectCrudGenerationDecorator = SideEffectCrudGenerationDecorator::for(
             $this->sideEffectCrudCodeGenerator,
             $namespace,
@@ -48,7 +48,7 @@ class ListenerGenerator
             $constructorMethod,
             $handleMethod
         );
-        
+
         foreach ($instruction->getSideEffects() as $sideEffect) {
             $sideEffectCrudGenerationDecorator->decorateWith($sideEffect);
         }

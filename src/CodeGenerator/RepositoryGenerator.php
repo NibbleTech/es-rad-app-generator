@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
@@ -20,14 +21,14 @@ class RepositoryGenerator
             ->setStrictTypes();
 
         $namespace = $file->addNamespace('App\Repositories');
-        
+
         $entityFqcn = 'App\Entities\\' . $entity->getClass();
 
         $namespace->addUse($entityFqcn);
         $namespace->addUse(UuidInterface::class);
 
         $class = $namespace->addClass($entity->getClass() . 'Repository');
-        
+
         $findMethod = $class->addMethod('find');
         $findMethod->setReturnType($entityFqcn);
         $findMethod
@@ -56,4 +57,3 @@ class RepositoryGenerator
         return (new CustomNettePrinter())->printFile($file);
     }
 }
-

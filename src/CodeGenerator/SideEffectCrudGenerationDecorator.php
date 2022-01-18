@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
@@ -18,30 +19,29 @@ class SideEffectCrudGenerationDecorator
     private ClassType $class;
     private Method $constructorMethod;
     private Method $handleMethod;
-    
+
     final public function __construct()
     {
     }
-    
+
     public static function for(
         SideEffectCrudCodeGenerator $handleMethodCodeGenerator,
         PhpNamespace $namespace,
         ClassType $class,
         Method $constructorMethod,
         Method $handleMethod
-    ): SideEffectCrudGenerationDecorator
-    {
+    ): SideEffectCrudGenerationDecorator {
         $self = new static();
-        
+
         $self->handleMethodCodeGenerator = $handleMethodCodeGenerator;
         $self->namespace = $namespace;
         $self->class = $class;
         $self->constructorMethod = $constructorMethod;
         $self->handleMethod = $handleMethod;
-        
+
         return $self;
     }
-    
+
     public function decorateWith(
         SideEffect $sideEffect
     ): void {
@@ -50,17 +50,17 @@ class SideEffectCrudGenerationDecorator
         $this->namespace->addUse($entityFqcn);
         $entityRepository = 'App\Repositories\\' . $sideEffect->getEntityClass() . 'Repository';
         $this->namespace->addUse($entityRepository);
-        
+
         $repositoryShortClass = $sideEffect->getEntityClass() . 'Repository';
         $repositoryPropertyName = lcfirst($repositoryShortClass);
-        
+
         $this->constructorMethod->addParameter(lcfirst($repositoryShortClass))
             ->setType('App\Repositories\\' . $sideEffect->getEntityClass() . 'Repository');
-        
+
         $this->constructorMethod->addBody(
             "\$this->{$repositoryPropertyName} = \${$repositoryPropertyName};"
         );
-        
+
         $this->class->addProperty($repositoryPropertyName)
             ->setPrivate();
 
