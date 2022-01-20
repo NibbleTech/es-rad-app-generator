@@ -11,12 +11,12 @@ class NativeXMLInstructionProviderTest extends TestCase
 {
     use ReusableDemoInstructionAssertions;
 
-    private NativeXMLInstructionProvider $instructionProvider;
+    private InstructionProvider $instructionProvider;
 
     protected function setUp(): void
     {
         $nativeXML = new NativeXML(__DIR__ . '/../../demo.xml');
-        $this->instructionProvider = new NativeXMLInstructionProvider(
+        $this->instructionProvider = new InstructionProvider(
             $nativeXML
         );
     }
