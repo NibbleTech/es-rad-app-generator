@@ -6,6 +6,11 @@
             "EsRadAppGenerator\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "EsRadAppGenerator\\TestHelpers\\": "tests/Helpers/"
+        }
+    },
     "authors": [
         {
             "name": "Shaun Walker",
@@ -15,7 +20,8 @@
     "require": {
         "php": "^8.1",
         "nette/php-generator": "^3.6",
-        "ramsey/uuid": "^4.2"
+        "ramsey/uuid": "^4.2",
+        "ext-simplexml": "*"
     },
     "require-dev": {
         "vimeo/psalm": "^4.18",

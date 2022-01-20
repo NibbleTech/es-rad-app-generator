@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<esRadApp>
+    <events>
+        <when description="Thing is sent" eventName="ThingSent">
+            <sideEffects>
+                <create entity="Thing">
+                    <propertyMappings>
+                        <propertyMap eventProperty="createEventProp1" entityProperty="createEntityProp1"/>
+                    </propertyMappings>
+                </create>
+            </sideEffects>
+        </when>
+        <when description="Thing is updated" eventName="ThingUpdated">
+            <sideEffects>
+                <update entity="Thing">
+                    <propertyMappings>
+                        <propertyMap eventProperty="updateEventProp1"
+                                     eventPropertyType="string"
+                                     entityProperty="updateEntityProp1"
+                                     entityPropertyType="string"/>
+                    </propertyMappings>
+                </update>
+            </sideEffects>
+        </when>
+        <when description="Thing is deleted" eventName="ThingDeleted">
+            <sideEffects>
+                <delete entity="Thing">
+                    <propertyMappings>
+                        <propertyMap eventProperty="deleteEventProp1" entityProperty="deleteEntityProp1"/>
+                    </propertyMappings>
+                </delete>
+            </sideEffects>
+        </when>
+    </events>
+</esRadApp>

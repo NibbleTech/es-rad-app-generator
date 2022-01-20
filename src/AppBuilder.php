@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator;
 
+use EsRadAppGenerator\InstructionProviders\InstructionProvider;
 use RecursiveDirectoryIterator;
 use FilesystemIterator;
 use RecursiveIteratorIterator;
@@ -23,6 +24,7 @@ use EsRadAppGenerator\EntityStuff\Output\Instruction;
 final class AppBuilder
 {
     private string $buildDir;
+    private InstructionProvider $instructionProvider;
     private EventGenerator $eventGenerator;
     private EntityGenerator $entityGenerator;
     private RepositoryGenerator $repoGenerator;
@@ -40,9 +42,11 @@ final class AppBuilder
     private array $globalEntities = [];
 
     final public function __construct(
-        string $buildDir
+        string $buildDir,
+        InstructionProvider $instructionProvider
     ) {
         $this->buildDir        = $buildDir;
+        $this->instructionProvider = $instructionProvider;
         $this->eventGenerator  = new EventGenerator();
         $this->entityGenerator = new EntityGenerator();
         $this->repoGenerator   = new RepositoryGenerator();
@@ -52,19 +56,22 @@ final class AppBuilder
     {
         $this->clearBuildDirectory();
 
+        $instructions = $this->instructionProvider->provideInstructions();
+
         /**
-         * @TODO Run through all instructions to generate global list of Events and Entities
-         * Need something that can take Event classes and compile all possible properties.
+         * @TODO Need something that can take Event classes and compile all possible properties.
          */
 
-        $this->doCommon();
+        $this->generateCommonClasses();
 
-        $this->doEvents();
+        $this->compileGlobals($instructions);
 
-        $this->doEntities();
+        $this->generateEvents();
+
+        $this->generateEntities();
 
         foreach ($this->instructions as $instruction) {
-            $this->doListener($instruction);
+            $this->generateListeners($instruction);
         }
     }
 
@@ -80,7 +87,22 @@ final class AppBuilder
         }
     }
 
-    private function doCommon(): void
+    /**
+     * @param Instruction[] $instructions
+     *
+     * @return void
+     */
+    private function compileGlobals(array $instructions): void
+    {
+        foreach ($instructions as $instruction) {
+            $this->addEventToGlobalList($instruction->getEvent());
+            foreach ($instruction->getEntities() as $entity) {
+                $this->addEntityToGlobalList($entity);
+            }
+        }
+    }
+
+    private function generateCommonClasses(): void
     {
         echo 'Generating Common files ' . PHP_EOL;
 
@@ -103,19 +125,12 @@ final class AppBuilder
         file_put_contents($commonDir . 'Entity.php', $entityInterfaceGenerator->generate());
     }
 
-    private function doEvents(): void
+    private function generateEvents(): void
     {
         $eventsDir = $this->buildDir . '/Events/';
 
         if (!is_dir($eventsDir)) {
             mkdir($eventsDir);
-        }
-
-        /**
-         * Temp until we have the global event/entity compiler.
-         */
-        foreach ($this->instructions as $instruction) {
-            $this->addEventToGlobalList($instruction->getEvent());
         }
 
         foreach ($this->globalEvents as $globalEvent) {
@@ -128,7 +143,7 @@ final class AppBuilder
         }
     }
 
-    private function doEntities(): void
+    private function generateEntities(): void
     {
         $entityDir = $this->buildDir . '/Entities/';
         $repoDir   = $this->buildDir . '/Repositories/';
@@ -138,15 +153,6 @@ final class AppBuilder
         }
         if (!is_dir($repoDir)) {
             mkdir($repoDir);
-        }
-
-        /**
-         * Temp until we have the global event/entity compiler.
-         */
-        foreach ($this->instructions as $instruction) {
-            foreach ($instruction->getEntities() as $entity) {
-                $this->addEntityToGlobalList($entity);
-            }
         }
 
         foreach ($this->globalEntities as $globalEntity) {
@@ -166,7 +172,7 @@ final class AppBuilder
         }
     }
 
-    public function addEventToGlobalList(Event $newEvent): void
+    private function addEventToGlobalList(Event $newEvent): void
     {
         $event = $this->globalEvents[$newEvent->getClass()] ?? $newEvent;
 
@@ -177,7 +183,7 @@ final class AppBuilder
         $this->globalEvents[$event->getClass()] = $event;
     }
 
-    public function addEntityToGlobalList(Entity $newEntity): void
+    private function addEntityToGlobalList(Entity $newEntity): void
     {
         $entity = $this->globalEntities[$newEntity->getClass()] ?? $newEntity;
 
@@ -188,7 +194,7 @@ final class AppBuilder
         $this->globalEntities[$entity->getClass()] = $entity;
     }
 
-    public function doListener(Instruction $instruction): void
+    private function generateListeners(Instruction $instruction): void
     {
         $listenerDir = $this->buildDir . '/Listeners/';
 

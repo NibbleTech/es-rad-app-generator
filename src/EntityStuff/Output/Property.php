@@ -29,4 +29,15 @@ final class Property
     {
         return $this->name;
     }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function sameAs(Property $property): bool
+    {
+        return $property->getName() === $this->getName()
+            && $property->getType() === $property->getType();
+    }
 }
