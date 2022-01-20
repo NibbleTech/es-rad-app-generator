@@ -27,7 +27,7 @@ class ListenerGeneratorTest extends TestCase
         );
     }
 
-    public function test_it_generates_listener_code_for_single_create_side_effect()
+    public function test_it_generates_listener_code_for_single_create_side_effect(): void
     {
         $sideEffectA = Creation::forEntityClass(
             'Test',
@@ -89,7 +89,7 @@ php;
         $this->assertEquals($expected, $code);
     }
 
-    public function test_it_generates_listener_code_for_single_update_side_effect()
+    public function test_it_generates_listener_code_for_single_update_side_effect(): void
     {
         $sideEffectA = Update::forEntityClass(
             'Test',
@@ -153,7 +153,7 @@ php;
         $this->assertEquals($expected, $code);
     }
 
-    public function test_it_generates_listener_code_for_single_delete_side_effect()
+    public function test_it_generates_listener_code_for_single_delete_side_effect(): void
     {
         $sideEffectA = Deletion::forEntityClass(
             'Test',
@@ -216,7 +216,7 @@ php;
         $this->assertEquals($expected, $code);
     }
 
-    public function test_it_generates_listener_code_for_multiple_side_effects()
+    public function test_it_generates_listener_code_for_multiple_side_effects(): void
     {
         $sideEffectA = Creation::forEntityClass(
             'CreationEntity',

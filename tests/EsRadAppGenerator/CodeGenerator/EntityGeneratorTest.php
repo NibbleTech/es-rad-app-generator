@@ -17,7 +17,7 @@ class EntityGeneratorTest extends TestCase
         $this->entityGenerator = new EntityGenerator();
     }
 
-    function test_it_generates_code_for_event()
+    function test_it_generates_code_for_event(): void
     {
         $expected = <<<php
 <?php
@@ -35,7 +35,6 @@ class Test implements Entity
 }
 
 php;
-        $entityGenerator = new EntityGenerator();
 
         $event = Entity::new(
             'Test',

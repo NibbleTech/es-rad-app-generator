@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class EntityTest extends TestCase
 {
-    function test_it_can_merge_entities_and_dedupe_properties()
+    function test_it_can_merge_entities_and_dedupe_properties(): void
     {
         $entityA = Entity::new(
             'Test',
@@ -37,7 +37,7 @@ class EntityTest extends TestCase
         $this->assertEquals($entityAExpected, $entityA);
     }
 
-    function test_it_throws_exception_when_merging_entities_with_different_classes()
+    function test_it_throws_exception_when_merging_entities_with_different_classes(): void
     {
         $entityA = Entity::new(
             'Test',

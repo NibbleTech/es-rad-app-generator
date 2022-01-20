@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class EventTest extends TestCase
 {
-    function test_it_can_merge_events_and_dedupe_properties()
+    function test_it_can_merge_events_and_dedupe_properties(): void
     {
         $eventA = Event::new(
             'Test',
@@ -37,7 +37,7 @@ class EventTest extends TestCase
         $this->assertEquals($eventAExpected, $eventA);
     }
 
-    function test_it_throws_exception_when_merging_events_with_different_classes()
+    function test_it_throws_exception_when_merging_events_with_different_classes(): void
     {
         $entityA = Event::new(
             'Test',

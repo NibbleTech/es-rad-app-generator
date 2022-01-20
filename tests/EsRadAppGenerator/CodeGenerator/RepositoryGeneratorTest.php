@@ -17,7 +17,7 @@ class RepositoryGeneratorTest extends TestCase
         $this->repositoryGenerator = new RepositoryGenerator();
     }
 
-    function test_it_generates_code_for_entity()
+    function test_it_generates_code_for_entity(): void
     {
         $expected = <<<php
 <?php

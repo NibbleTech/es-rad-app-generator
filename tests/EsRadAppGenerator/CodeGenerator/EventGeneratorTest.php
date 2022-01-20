@@ -17,7 +17,7 @@ class EventGeneratorTest extends TestCase
         $this->eventGenerator = new EventGenerator();
     }
 
-    function test_it_generates_code_for_event()
+    function test_it_generates_code_for_event(): void
     {
         $expected = <<<php
 <?php

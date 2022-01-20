@@ -21,7 +21,7 @@ class SideEffectCrudCodeGeneratorTest extends TestCase
         $this->sideEffectCrudCodeGenerator = new SideEffectCrudCodeGenerator();
     }
 
-    function test_it_generates_create_code()
+    function test_it_generates_create_code(): void
     {
         $expected = <<<php
 \$entityTestForCreation = new Foo\Test();
@@ -45,7 +45,7 @@ php;
         $this->assertEquals($expected, $code);
     }
 
-    function test_it_generates_update_code()
+    function test_it_generates_update_code(): void
     {
         $tab      = "\t";
         $expected = <<<php
@@ -72,7 +72,7 @@ php;
         $this->assertEquals($expected, $code);
     }
 
-    function test_it_generates_delete_code()
+    function test_it_generates_delete_code(): void
     {
         $tab          = "\t";
         $expected = <<<php
