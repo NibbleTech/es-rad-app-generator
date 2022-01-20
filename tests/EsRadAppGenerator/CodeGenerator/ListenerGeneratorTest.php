@@ -79,7 +79,6 @@ php;
                     Property::new('bar', 'string'),
                 ])
             ),
-            [],
             [
                 $sideEffectA
             ]
@@ -144,7 +143,6 @@ php;
                     Property::new('bar', 'string'),
                 ])
             ),
-            [],
             [
                 $sideEffectA
             ]
@@ -208,7 +206,6 @@ php;
                     Property::new('bar', 'string'),
                 ])
             ),
-            [],
             [
                 $sideEffectA
             ]
@@ -311,7 +308,6 @@ php;
                     Property::new('bar', 'string'),
                 ])
             ),
-            [],
             [
                 $sideEffectA,
                 $sideEffectB,
