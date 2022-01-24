@@ -13,7 +13,7 @@
   </xs:complexType>
   <xs:complexType name="propertyMappingsType">
     <xs:sequence>
-      <xs:element type="propertyMapType" name="propertyMap"/>
+      <xs:element type="propertyMapType" name="propertyMap" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="createType">
