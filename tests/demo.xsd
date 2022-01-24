@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="esRadApp" type="esRadAppType"/>
+  <xs:complexType name="propertyMapType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="eventProperty" use="required"/>
+        <xs:attribute type="xs:string" name="entityProperty" use="required"/>
+        <xs:attribute type="xs:string" name="eventPropertyType"/>
+        <xs:attribute type="xs:string" name="entityPropertyType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="propertyMappingsType">
+    <xs:sequence>
+      <xs:element type="propertyMapType" name="propertyMap"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createType">
+    <xs:sequence>
+      <xs:element type="propertyMappingsType" name="propertyMappings"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="entity" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="sideEffectsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element type="createType" name="create" minOccurs="0"/>
+      <xs:element type="updateType" name="update" minOccurs="0"/>
+      <xs:element type="deleteType" name="delete" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="whenType">
+    <xs:sequence>
+      <xs:element type="sideEffectsType" name="sideEffects"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="description" use="required"/>
+    <xs:attribute type="xs:string" name="eventName" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="updateType">
+    <xs:sequence>
+      <xs:element type="propertyMappingsType" name="propertyMappings"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="entity" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="deleteType">
+    <xs:sequence>
+      <xs:element type="propertyMappingsType" name="propertyMappings"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="entity" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="eventsType">
+    <xs:sequence>
+      <xs:element type="whenType" name="when" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="esRadAppType">
+    <xs:sequence>
+      <xs:element type="eventsType" name="events"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
