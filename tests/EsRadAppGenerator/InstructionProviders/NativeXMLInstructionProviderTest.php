@@ -1,11 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace EsRadAppGenerator\InstructionProviders;
 
 use EsRadAppGenerator\Configuration\XmlProviders\NativeXML;
+use EsRadAppGenerator\Configuration\XmlProviders\XmlProvider;
 use EsRadAppGenerator\TestHelpers\ReusableDemoInstructionAssertions;
 use PHPUnit\Framework\TestCase;
+use SimpleXMLElement;
 
 class NativeXMLInstructionProviderTest extends TestCase
 {
@@ -15,9 +18,20 @@ class NativeXMLInstructionProviderTest extends TestCase
 
     protected function setUp(): void
     {
-        $nativeXML = new NativeXML(__DIR__ . '/../../demo.xml');
+        $xmlString = file_get_contents(__DIR__ . '/../../demo.xml');
+        $anonXml = new class ($xmlString) implements XmlProvider {
+            public function __construct(
+                private string $xmlString
+            ) {
+            }
+            public function provideSimpleXml(): SimpleXMLElement
+            {
+                return new SimpleXMLElement($this->xmlString);
+            }
+        };
+
         $this->instructionProvider = new InstructionProvider(
-            $nativeXML
+            $anonXml
         );
     }
 
