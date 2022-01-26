@@ -85,7 +85,7 @@ final class Instruction
             }
 
             foreach ($sideEffect->getPropertyMappings() as $propertyMapping) {
-                $propertyCollection->addProperty($propertyMapping->getEventProperty());
+                $propertyCollection->addProperty($propertyMapping->getEntityProperty());
                 /**
                  * @TODO add try catch here once addProperty uses custom exception for conflicting property types
                  */
