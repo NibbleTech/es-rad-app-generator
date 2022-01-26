@@ -12,7 +12,7 @@ use function PHPUnit\Framework\assertEquals;
 
 class InstructionTest extends TestCase
 {
-    public function test_it_constructs()
+    public function test_it_constructs(): void
     {
         $event = Event::new(
             'Foo\\Test',
