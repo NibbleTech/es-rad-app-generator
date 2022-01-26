@@ -16,52 +16,9 @@ Future generation ideas:
 
 # Example
 
-## XML
-XML Configuration example
+See `demo` directory for example of native config XML and its generated code.
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<esRadApp>
-    <events>
-        <when description="Thing is sent" eventName="ThingSent">
-            <sideEffects>
-                <create entity="Thing">
-                    <propertyMappings>
-                        <propertyMap eventProperty="createEventProp1" entityProperty="createEntityProp1"/>
-                        <propertyMap eventProperty="createEventProp2"
-                                     eventPropertyType="int"
-                                     entityProperty="createEntityProp2"
-                                     entityPropertyType="int"
-                        />
-                    </propertyMappings>
-                </create>
-            </sideEffects>
-        </when>
-        <when description="Thing is updated" eventName="ThingUpdated">
-            <sideEffects>
-                <update entity="Thing">
-                    <propertyMappings>
-                        <propertyMap eventProperty="updateEventProp1"
-                                     eventPropertyType="string"
-                                     entityProperty="updateEntityProp1"
-                                     entityPropertyType="string"/>
-                    </propertyMappings>
-                </update>
-            </sideEffects>
-        </when>
-        <when description="Thing is deleted" eventName="ThingDeleted">
-            <sideEffects>
-                <delete entity="Thing">
-                    <propertyMappings>
-                        <propertyMap eventProperty="deleteEventProp1" entityProperty="deleteEntityProp1"/>
-                    </propertyMappings>
-                </delete>
-            </sideEffects>
-        </when>
-    </events>
-</esRadApp>
-```
+# Usage
 
-### Code Generated
-
-TODO
+This is still super early WIP so no polished distributable yet. But you can clone this repo and run `bin/esapp <app_dir>` to try it out yourself.
+`app_dir` being a directory containing an `esradapp.xml` file
