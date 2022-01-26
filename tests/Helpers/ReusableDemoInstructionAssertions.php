@@ -44,6 +44,7 @@ trait ReusableDemoInstructionAssertions
                     'ThingSent',
                     PropertyCollection::with([
                         Property::new('createEventProp1', 'string'),
+                        Property::new('createEventProp2', 'int'),
                     ])
                 ),
                 [
@@ -53,7 +54,11 @@ trait ReusableDemoInstructionAssertions
                             EventEntityPropertyMapping::with(
                                 Property::new('createEntityProp1', 'string'),
                                 Property::new('createEventProp1', 'string'),
-                            )
+                            ),
+                            EventEntityPropertyMapping::with(
+                                Property::new('createEntityProp2', 'int'),
+                                Property::new('createEventProp2', 'int'),
+                            ),
                         ]
                     ),
                 ]

@@ -9,6 +9,11 @@
                 <create entity="Thing">
                     <propertyMappings>
                         <propertyMap eventProperty="createEventProp1" entityProperty="createEntityProp1"/>
+                        <propertyMap eventProperty="createEventProp2"
+                                     eventPropertyType="int"
+                                     entityProperty="createEntityProp2"
+                                     entityPropertyType="int"
+                        />
                     </propertyMappings>
                 </create>
             </sideEffects>
