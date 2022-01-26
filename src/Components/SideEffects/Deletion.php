@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\EntityStuff\Output\SideEffects;
+namespace EsRadAppGenerator\Components\SideEffects;
 
-use EsRadAppGenerator\EntityStuff\Output\EventEntityPropertyMapping;
+use EsRadAppGenerator\Components\EventEntityPropertyMapping;
 
 final class Deletion implements SideEffect
 {

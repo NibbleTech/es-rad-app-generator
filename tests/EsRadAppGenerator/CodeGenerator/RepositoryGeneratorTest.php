@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\EntityStuff\Output\Entity;
-use EsRadAppGenerator\EntityStuff\Output\Property;
-use EsRadAppGenerator\EntityStuff\Output\PropertyCollection;
+use EsRadAppGenerator\Components\Entity;
+use EsRadAppGenerator\Components\Property;
+use EsRadAppGenerator\Components\PropertyCollection;
 use PHPUnit\Framework\TestCase;
 
 class RepositoryGeneratorTest extends TestCase

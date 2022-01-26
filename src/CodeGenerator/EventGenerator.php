@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\EntityStuff\Output\Event;
+use EsRadAppGenerator\Components\Event;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;

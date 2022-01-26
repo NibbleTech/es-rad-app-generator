@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\EntityStuff\Output\Event;
-use EsRadAppGenerator\EntityStuff\Output\Property;
-use EsRadAppGenerator\EntityStuff\Output\PropertyCollection;
+use EsRadAppGenerator\Components\Event;
+use EsRadAppGenerator\Components\Property;
+use EsRadAppGenerator\Components\PropertyCollection;
 use PHPUnit\Framework\TestCase;
 
 class EventGeneratorTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\EntityStuff\Output;
+namespace EsRadAppGenerator\Components;
 
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
+use EsRadAppGenerator\Components\SideEffects\SideEffect;
 
 final class Instruction
 {

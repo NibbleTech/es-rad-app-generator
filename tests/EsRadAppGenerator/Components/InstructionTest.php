@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\EntityStuff\Output;
+namespace EsRadAppGenerator\Components;
 
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Creation;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Update;
+use EsRadAppGenerator\Components\SideEffects\Creation;
+use EsRadAppGenerator\Components\SideEffects\Update;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;

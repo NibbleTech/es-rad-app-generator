@@ -1,29 +1,29 @@
 <?php
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\EntityStuff\Output;
+namespace EsRadAppGenerator\Components;
 
 use PHPUnit\Framework\TestCase;
 
-class EntityTest extends TestCase
+class EventTest extends TestCase
 {
-    function test_it_can_merge_entities_and_dedupe_properties(): void
+    function test_it_can_merge_events_and_dedupe_properties(): void
     {
-        $entityA = Entity::new(
+        $eventA = Event::new(
             'Test',
             PropertyCollection::with([
                 Property::new('foo', 'string'),
                 Property::new('bar', 'int'),
             ])
         );
-        $entityB = Entity::new(
+        $eventB = Event::new(
             'Test',
             PropertyCollection::with([
                 Property::new('baz', 'string'),
             ])
         );
 
-        $entityAExpected = Entity::new(
+        $eventAExpected = Event::new(
             'Test',
             PropertyCollection::with([
                 Property::new('foo', 'string'),
@@ -32,19 +32,19 @@ class EntityTest extends TestCase
             ])
         );
 
-        $entityA->merge($entityB);
+        $eventA->merge($eventB);
         
-        $this->assertEquals($entityAExpected, $entityA);
+        $this->assertEquals($eventAExpected, $eventA);
     }
 
-    function test_it_throws_exception_when_merging_entities_with_different_classes(): void
+    function test_it_throws_exception_when_merging_events_with_different_classes(): void
     {
-        $entityA = Entity::new(
+        $entityA = Event::new(
             'Test',
             PropertyCollection::with([
             ])
         );
-        $entityB = Entity::new(
+        $entityB = Event::new(
             'NOTTest',
             PropertyCollection::with([
             ])

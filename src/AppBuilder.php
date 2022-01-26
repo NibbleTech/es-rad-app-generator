@@ -17,9 +17,9 @@ use EsRadAppGenerator\CodeGenerator\EventGenerator;
 use EsRadAppGenerator\CodeGenerator\ListenerGenerator;
 use EsRadAppGenerator\CodeGenerator\RepositoryGenerator;
 use EsRadAppGenerator\CodeGenerator\SideEffectCrudCodeGenerator;
-use EsRadAppGenerator\EntityStuff\Output\Entity;
-use EsRadAppGenerator\EntityStuff\Output\Event;
-use EsRadAppGenerator\EntityStuff\Output\Instruction;
+use EsRadAppGenerator\Components\Entity;
+use EsRadAppGenerator\Components\Event;
+use EsRadAppGenerator\Components\Instruction;
 
 final class AppBuilder
 {

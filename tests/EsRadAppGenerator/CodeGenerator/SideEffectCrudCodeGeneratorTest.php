@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\EntityStuff\Output\EventEntityPropertyMapping;
-use EsRadAppGenerator\EntityStuff\Output\Property;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Creation;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Deletion;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Update;
+use EsRadAppGenerator\Components\EventEntityPropertyMapping;
+use EsRadAppGenerator\Components\Property;
+use EsRadAppGenerator\Components\SideEffects\Creation;
+use EsRadAppGenerator\Components\SideEffects\Deletion;
+use EsRadAppGenerator\Components\SideEffects\Update;
 use PHPUnit\Framework\TestCase;
 
 class SideEffectCrudCodeGeneratorTest extends TestCase

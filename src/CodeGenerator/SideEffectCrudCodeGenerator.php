@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace EsRadAppGenerator\CodeGenerator;
 
 use InvalidArgumentException;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\SideEffect;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Creation;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Deletion;
-use EsRadAppGenerator\EntityStuff\Output\SideEffects\Update;
+use EsRadAppGenerator\Components\SideEffects\SideEffect;
+use EsRadAppGenerator\Components\SideEffects\Creation;
+use EsRadAppGenerator\Components\SideEffects\Deletion;
+use EsRadAppGenerator\Components\SideEffects\Update;
 
 /**
  * Generates CRUD-y code for side effects that go into an event listener

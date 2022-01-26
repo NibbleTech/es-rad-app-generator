@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\EntityStuff\Output;
+namespace EsRadAppGenerator\Components;
 
 final class EventEntityPropertyMapping
 {

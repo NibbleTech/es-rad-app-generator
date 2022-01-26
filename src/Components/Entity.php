@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\EntityStuff\Output;
+namespace EsRadAppGenerator\Components;
 
 use InvalidArgumentException;
 
-final class Event
+final class Entity
 {
     private string $class;
     private PropertyCollection $properties;
@@ -17,23 +17,23 @@ final class Event
 
     public static function new(
         string $class,
-        ?PropertyCollection $propertyCollection = null
-    ): Event {
+        PropertyCollection $properties
+    ): Entity {
         $self = new self();
 
         $self->class = $class;
-        $self->properties = $propertyCollection ?? PropertyCollection::with([]);
+        $self->properties = $properties;
 
         return $self;
     }
 
-    public function merge(Event $event): void
+    public function merge(Entity $entity): void
     {
-        if ($event->getClass() !== $this->getClass()) {
-            throw new InvalidArgumentException("Trying to merge Event set as different class.");
+        if ($entity->getClass() !== $this->getClass()) {
+            throw new InvalidArgumentException("Trying to merge Entity set as different class.");
         }
 
-        $this->properties->mergeProperties($event->getProperties());
+        $this->properties->mergeProperties($entity->getProperties());
     }
 
     public function getClass(): string
