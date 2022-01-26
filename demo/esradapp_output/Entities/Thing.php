@@ -8,8 +8,8 @@ use App\Common\Entity;
 
 class Thing implements Entity
 {
-    public $createEventProp1;
-    public $createEventProp2;
-    public $updateEventProp1;
-    public $deleteEventProp1;
+    public $createEntityProp1;
+    public $createEntityProp2;
+    public $updateEntityProp1;
+    public $deleteEntityProp1;
 }
