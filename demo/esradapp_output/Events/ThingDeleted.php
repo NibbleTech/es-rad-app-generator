@@ -8,5 +8,5 @@ use App\Common\Event;
 
 class ThingDeleted implements Event
 {
-    public $deleteEventProp1;
+    public string $deleteEventProp1;
 }

@@ -8,6 +8,6 @@ use App\Common\Event;
 
 class ThingSent implements Event
 {
-    public $createEventProp1;
-    public $createEventProp2;
+    public string $createEventProp1;
+    public int $createEventProp2;
 }

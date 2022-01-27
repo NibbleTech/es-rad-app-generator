@@ -8,5 +8,5 @@ use App\Common\Event;
 
 class ThingUpdated implements Event
 {
-    public $updateEventProp1;
+    public string $updateEventProp1;
 }
