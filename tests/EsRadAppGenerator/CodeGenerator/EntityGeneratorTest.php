@@ -30,8 +30,8 @@ use App\Common\Entity;
 
 class Test implements Entity
 {
-    public \$foo;
-    public \$bar;
+    public string \$foo;
+    public int \$bar;
 }
 
 php;
@@ -40,7 +40,7 @@ php;
             'Test',
             PropertyCollection::with([
                 Property::new('foo', 'string'),
-                Property::new('bar', 'string'),
+                Property::new('bar', 'int'),
             ])
         );
 

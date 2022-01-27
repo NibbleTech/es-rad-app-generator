@@ -30,8 +30,8 @@ use App\Common\Event;
 
 class Test implements Event
 {
-    public \$foo;
-    public \$bar;
+    public int \$foo;
+    public string \$bar;
 }
 
 php;
@@ -39,7 +39,7 @@ php;
         $event = Event::new(
             'Test',
             PropertyCollection::with([
-                Property::new('foo', 'string'),
+                Property::new('foo', 'int'),
                 Property::new('bar', 'string'),
             ])
         );

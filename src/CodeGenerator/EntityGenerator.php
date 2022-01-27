@@ -31,6 +31,8 @@ final class EntityGenerator
         foreach ($entity->getProperties()->getProperties() as $property) {
             $class->addProperty(
                 $property->getName()
+            )->setType(
+                $property->getType()
             );
         }
 

@@ -33,9 +33,11 @@ final class EventGenerator
         foreach ($event->getProperties()->getProperties() as $property) {
             $class->addProperty(
                 $property->getName()
+            )->setType(
+                $property->getType()
             );
         }
 
-        return (new CustomNettePrinter()) ->printFile($file);
+        return (new CustomNettePrinter())->printFile($file);
     }
 }
