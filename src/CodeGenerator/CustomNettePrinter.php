@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
 use Nette\PhpGenerator\Printer;
 

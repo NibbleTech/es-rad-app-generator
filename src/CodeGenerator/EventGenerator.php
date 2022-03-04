@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\Components\Event;
+use NibbleTech\EsRadAppGenerator\Components\Event;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator\Common;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator\Common;
 
-use EsRadAppGenerator\CodeGenerator\CustomNettePrinter;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\CustomNettePrinter;
 use Nette\PhpGenerator\PhpFile;
 
 final class EventListenerInterfaceGenerator

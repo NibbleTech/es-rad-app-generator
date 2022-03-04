@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
 use InvalidArgumentException;
-use EsRadAppGenerator\Components\SideEffects\SideEffect;
-use EsRadAppGenerator\Components\SideEffects\Creation;
-use EsRadAppGenerator\Components\SideEffects\Deletion;
-use EsRadAppGenerator\Components\SideEffects\Update;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\SideEffect;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Deletion;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Update;
 
 /**
  * Generates CRUD-y code for side effects that go into an event listener

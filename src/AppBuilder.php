@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator;
+namespace NibbleTech\EsRadAppGenerator;
 
-use EsRadAppGenerator\InstructionProviders\InstructionProvider;
+use NibbleTech\EsRadAppGenerator\InstructionProviders\InstructionProvider;
 use RecursiveDirectoryIterator;
 use FilesystemIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
-use EsRadAppGenerator\CodeGenerator\Common\EntityInterfaceGenerator;
-use EsRadAppGenerator\CodeGenerator\Common\EventInterfaceGenerator;
-use EsRadAppGenerator\CodeGenerator\Common\EventListenerInterfaceGenerator;
-use EsRadAppGenerator\CodeGenerator\EntityGenerator;
-use EsRadAppGenerator\CodeGenerator\EventGenerator;
-use EsRadAppGenerator\CodeGenerator\ListenerGenerator;
-use EsRadAppGenerator\CodeGenerator\RepositoryGenerator;
-use EsRadAppGenerator\CodeGenerator\SideEffectCrudCodeGenerator;
-use EsRadAppGenerator\Components\Entity;
-use EsRadAppGenerator\Components\Event;
-use EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\Common\EntityInterfaceGenerator;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\Common\EventInterfaceGenerator;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\Common\EventListenerInterfaceGenerator;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\EntityGenerator;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\EventGenerator;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\ListenerGenerator;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\RepositoryGenerator;
+use NibbleTech\EsRadAppGenerator\CodeGenerator\SideEffectCrudCodeGenerator;
+use NibbleTech\EsRadAppGenerator\Components\Entity;
+use NibbleTech\EsRadAppGenerator\Components\Event;
+use NibbleTech\EsRadAppGenerator\Components\Instruction;
 
 final class AppBuilder
 {

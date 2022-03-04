@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\Components;
+namespace NibbleTech\EsRadAppGenerator\Components;
 
-use EsRadAppGenerator\Components\SideEffects\Creation;
-use EsRadAppGenerator\Components\SideEffects\Update;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Update;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;

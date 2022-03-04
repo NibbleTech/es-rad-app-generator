@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\Components\Event;
-use EsRadAppGenerator\Components\Property;
-use EsRadAppGenerator\Components\PropertyCollection;
+use NibbleTech\EsRadAppGenerator\Components\Event;
+use NibbleTech\EsRadAppGenerator\Components\Property;
+use NibbleTech\EsRadAppGenerator\Components\PropertyCollection;
 use PHPUnit\Framework\TestCase;
 
 class EventGeneratorTest extends TestCase

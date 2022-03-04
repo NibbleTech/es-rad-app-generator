@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\Configuration\XmlProviders;
+namespace NibbleTech\EsRadAppGenerator\Configuration\XmlProviders;
 
 use SimpleXMLElement;
 

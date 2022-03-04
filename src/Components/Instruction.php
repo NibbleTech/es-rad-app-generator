@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\Components;
+namespace NibbleTech\EsRadAppGenerator\Components;
 
-use EsRadAppGenerator\Components\SideEffects\SideEffect;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\SideEffect;
 
 final class Instruction
 {

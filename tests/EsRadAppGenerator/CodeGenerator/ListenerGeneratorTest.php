@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\Components\Event;
-use EsRadAppGenerator\Components\EventEntityPropertyMapping;
-use EsRadAppGenerator\Components\Instruction;
-use EsRadAppGenerator\Components\Property;
-use EsRadAppGenerator\Components\PropertyCollection;
-use EsRadAppGenerator\Components\SideEffects\Creation;
-use EsRadAppGenerator\Components\SideEffects\Deletion;
-use EsRadAppGenerator\Components\SideEffects\Update;
+use NibbleTech\EsRadAppGenerator\Components\Event;
+use NibbleTech\EsRadAppGenerator\Components\EventEntityPropertyMapping;
+use NibbleTech\EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\Components\Property;
+use NibbleTech\EsRadAppGenerator\Components\PropertyCollection;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Deletion;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Update;
 use PHPUnit\Framework\TestCase;
 
 class ListenerGeneratorTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\Components\SideEffects\SideEffect;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\SideEffect;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\PhpNamespace;

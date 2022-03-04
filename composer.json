@@ -1,14 +1,14 @@
 {
-    "name": "theshaunwalker/es-rad-skeleton-generator",
+    "name": "nibbletech/es-rad-app-generator",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "EsRadAppGenerator\\": "src/"
+            "NibbleTech\\EsRadAppGenerator\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EsRadAppGenerator\\TestHelpers\\": "tests/Helpers/"
+            "NibbleTech\\EsRadAppGenerator\\TestHelpers\\": "tests/Helpers/"
         }
     },
     "authors": [

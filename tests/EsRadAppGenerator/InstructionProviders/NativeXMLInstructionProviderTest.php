@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\InstructionProviders;
+namespace NibbleTech\EsRadAppGenerator\InstructionProviders;
 
-use EsRadAppGenerator\Configuration\XmlProviders\NativeXML;
-use EsRadAppGenerator\Configuration\XmlProviders\XmlProvider;
-use EsRadAppGenerator\TestHelpers\ReusableDemoInstructionAssertions;
+use NibbleTech\EsRadAppGenerator\Configuration\XmlProviders\NativeXML;
+use NibbleTech\EsRadAppGenerator\Configuration\XmlProviders\XmlProvider;
+use NibbleTech\EsRadAppGenerator\TestHelpers\ReusableDemoInstructionAssertions;
 use PHPUnit\Framework\TestCase;
 use SimpleXMLElement;
 

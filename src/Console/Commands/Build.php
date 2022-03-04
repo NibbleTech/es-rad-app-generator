@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\Console\Commands;
+namespace NibbleTech\EsRadAppGenerator\Console\Commands;
 
-use EsRadAppGenerator\AppBuilder;
-use EsRadAppGenerator\Configuration\XmlProviders\NativeXML;
-use EsRadAppGenerator\InstructionProviders\InstructionProvider;
+use NibbleTech\EsRadAppGenerator\AppBuilder;
+use NibbleTech\EsRadAppGenerator\Configuration\XmlProviders\NativeXML;
+use NibbleTech\EsRadAppGenerator\InstructionProviders\InstructionProvider;
 use InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;

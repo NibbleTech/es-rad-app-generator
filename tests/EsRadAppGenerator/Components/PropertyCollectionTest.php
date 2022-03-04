@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\Components;
+namespace NibbleTech\EsRadAppGenerator\Components;
 
 use PHPUnit\Framework\TestCase;
 

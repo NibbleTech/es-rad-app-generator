@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace EsRadAppGenerator\CodeGenerator;
+namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
-use EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\Components\Instruction;
 use Nette\PhpGenerator\PhpFile;
 
 final class ListenerGenerator
