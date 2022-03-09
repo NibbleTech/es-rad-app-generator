@@ -30,7 +30,7 @@
         "friendsofphp/php-cs-fixer": "^3.6",
         "phpunit/phpunit": "^9.5",
         "phpspec/prophecy-phpunit": "^2.0",
-        "roave/infection-static-analysis-plugin": "^1.16",
+        "roave/infection-static-analysis-plugin": "^1.18",
         "psalm/plugin-phpunit": "^0.16.1"
     },
     "config": {
