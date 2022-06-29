@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de9d9d71f882e3f1042a42f104d34637",
+    "content-hash": "0e703514fdb4cf9d319322c45f97255b",
     "packages": [
         {
             "name": "brick/math",
@@ -3881,24 +3881,24 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.13.0",
+            "version": "0.13.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "bb3b32dd590cbd0deb67c2ce8ae32801357ff059"
+                "reference": "3e494a75243efe264528cd8c275c49bebbc3412e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/bb3b32dd590cbd0deb67c2ce8ae32801357ff059",
-                "reference": "bb3b32dd590cbd0deb67c2ce8ae32801357ff059",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/3e494a75243efe264528cd8c275c49bebbc3412e",
+                "reference": "3e494a75243efe264528cd8c275c49bebbc3412e",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.6.8"
+                "phpstan/phpstan": "^1.7.12"
             },
             "conflict": {
-                "phpstan/phpdoc-parser": "<1.2",
+                "phpstan/phpdoc-parser": "<1.6.2",
                 "rector/rector-cakephp": "*",
                 "rector/rector-doctrine": "*",
                 "rector/rector-laravel": "*",
@@ -3914,7 +3914,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.12-dev"
+                    "dev-main": "0.13-dev"
                 }
             },
             "autoload": {
@@ -3929,7 +3929,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.13.0"
+                "source": "https://github.com/rectorphp/rector/tree/0.13.6"
             },
             "funding": [
                 {
@@ -3937,7 +3937,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-23T10:26:32+00:00"
+            "time": "2022-06-21T15:26:14+00:00"
         },
         {
             "name": "roave/infection-static-analysis-plugin",
