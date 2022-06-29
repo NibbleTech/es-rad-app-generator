@@ -25,7 +25,7 @@
         "symfony/console": "^6.1"
     },
     "require-dev": {
-        "vimeo/psalm": "^4.23",
+        "vimeo/psalm": "^4.24",
         "rector/rector": "^0.13.0",
         "friendsofphp/php-cs-fixer": "^3.8",
         "phpunit/phpunit": "^9.5",
