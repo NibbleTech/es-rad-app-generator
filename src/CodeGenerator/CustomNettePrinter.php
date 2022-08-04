@@ -8,8 +8,8 @@ use Nette\PhpGenerator\Printer;
 
 final class CustomNettePrinter extends Printer
 {
-    protected $indentation = "    ";
-    protected $linesBetweenProperties = 0;
-    protected $linesBetweenMethods = 1;
-    protected $returnTypeColon = ': ';
+    public string $indentation = "    ";
+    public int $linesBetweenProperties = 0;
+    public int $linesBetweenMethods = 1;
+    public string $returnTypeColon = ': ';
 }

@@ -271,7 +271,7 @@ class FooBar implements EventListener
     public function __construct(
         CreationEntityRepository \$creationEntityRepository,
         UpdateEntityRepository \$updateEntityRepository,
-        DeleteEntityRepository \$deleteEntityRepository
+        DeleteEntityRepository \$deleteEntityRepository,
     ) {
         \$this->creationEntityRepository = \$creationEntityRepository;
         \$this->updateEntityRepository = \$updateEntityRepository;
