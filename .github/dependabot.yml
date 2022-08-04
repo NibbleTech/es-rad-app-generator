@@ -10,12 +10,10 @@ updates:
     directory: /
     package-ecosystem: composer
     schedule:
-      interval: weekly
-      day: wednesday
-    versioning-strategy: increase
+      interval: monthly
+    versioning-strategy: widen
   - directory: /
     package-ecosystem: github-actions
     schedule:
-      interval: weekly
-      day: wednesday
+      interval: monthly
 
