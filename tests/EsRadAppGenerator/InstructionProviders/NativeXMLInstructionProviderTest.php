@@ -12,33 +12,33 @@ use SimpleXMLElement;
 
 class NativeXMLInstructionProviderTest extends TestCase
 {
-    use ReusableDemoInstructionAssertions;
+	use ReusableDemoInstructionAssertions;
 
-    private InstructionProvider $instructionProvider;
+	private InstructionProvider $instructionProvider;
 
-    protected function setUp(): void
-    {
-        $xmlString = file_get_contents(__DIR__ . '/../../demo.xml');
-        $anonXml = new class ($xmlString) implements XmlProvider {
-            public function __construct(
-                private string $xmlString
-            ) {
-            }
-            public function provideSimpleXml(): SimpleXMLElement
-            {
-                return new SimpleXMLElement($this->xmlString);
-            }
-        };
+	protected function setUp(): void
+	{
+		$xmlString = file_get_contents(__DIR__ . '/../../demo.xml');
+		$anonXml = new class ($xmlString) implements XmlProvider {
+			public function __construct(
+				private string $xmlString
+			) {
+			}
+			public function provideSimpleXml(): SimpleXMLElement
+			{
+				return new SimpleXMLElement($this->xmlString);
+			}
+		};
 
-        $this->instructionProvider = new InstructionProvider(
-            $anonXml
-        );
-    }
+		$this->instructionProvider = new InstructionProvider(
+			$anonXml
+		);
+	}
 
-    public function test_it_produces_correct_instructions(): void
-    {
-        $instructions = $this->instructionProvider->provideInstructions();
+	public function test_it_produces_correct_instructions(): void
+	{
+		$instructions = $this->instructionProvider->provideInstructions();
 
-        $this->assertInstructionsMatchExpectedDemo($instructions);
-    }
+		$this->assertInstructionsMatchExpectedDemo($instructions);
+	}
 }

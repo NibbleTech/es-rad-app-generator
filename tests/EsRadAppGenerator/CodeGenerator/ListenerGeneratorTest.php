@@ -16,30 +16,30 @@ use PHPUnit\Framework\TestCase;
 
 class ListenerGeneratorTest extends TestCase
 {
-    private ListenerGenerator $listenerGenerator;
+	private ListenerGenerator $listenerGenerator;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
+	protected function setUp(): void
+	{
+		parent::setUp();
 
-        $this->listenerGenerator = new ListenerGenerator(
-            new SideEffectCrudCodeGenerator()
-        );
-    }
+		$this->listenerGenerator = new ListenerGenerator(
+			new SideEffectCrudCodeGenerator()
+		);
+	}
 
-    public function test_it_generates_listener_code_for_single_create_side_effect(): void
-    {
-        $sideEffectA = Creation::forEntityClass(
-            'Test',
-            [
-                EventEntityPropertyMapping::with(
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                )
-            ]
-        );
+	public function test_it_generates_listener_code_for_single_create_side_effect(): void
+	{
+		$sideEffectA = Creation::forEntityClass(
+			'Test',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				)
+			]
+		);
 
-        $expected = <<<php
+		$expected = <<<php
 <?php
 
 declare(strict_types=1);
@@ -70,38 +70,38 @@ class FooBar implements EventListener
 
 php;
 
-        $instruction = Instruction::new(
-            'foo bar',
-            Event::new(
-                'Test',
-                PropertyCollection::with([
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                ])
-            ),
-            [
-                $sideEffectA
-            ]
-        );
+		$instruction = Instruction::new(
+			'foo bar',
+			Event::new(
+				'Test',
+				PropertyCollection::with([
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				])
+			),
+			[
+				$sideEffectA
+			]
+		);
 
-        $code = $this->listenerGenerator->generate($instruction);
+		$code = $this->listenerGenerator->generate($instruction);
 
-        $this->assertEquals($expected, $code);
-    }
+		$this->assertEquals($expected, $code);
+	}
 
-    public function test_it_generates_listener_code_for_single_update_side_effect(): void
-    {
-        $sideEffectA = Update::forEntityClass(
-            'Test',
-            [
-                EventEntityPropertyMapping::with(
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                )
-            ]
-        );
+	public function test_it_generates_listener_code_for_single_update_side_effect(): void
+	{
+		$sideEffectA = Update::forEntityClass(
+			'Test',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				)
+			]
+		);
 
-        $expected = <<<php
+		$expected = <<<php
 <?php
 
 declare(strict_types=1);
@@ -134,38 +134,38 @@ class FooBar implements EventListener
 
 php;
 
-        $instruction = Instruction::new(
-            'foo bar',
-            Event::new(
-                'Test',
-                PropertyCollection::with([
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                ])
-            ),
-            [
-                $sideEffectA
-            ]
-        );
+		$instruction = Instruction::new(
+			'foo bar',
+			Event::new(
+				'Test',
+				PropertyCollection::with([
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				])
+			),
+			[
+				$sideEffectA
+			]
+		);
 
-        $code = $this->listenerGenerator->generate($instruction);
+		$code = $this->listenerGenerator->generate($instruction);
 
-        $this->assertEquals($expected, $code);
-    }
+		$this->assertEquals($expected, $code);
+	}
 
-    public function test_it_generates_listener_code_for_single_delete_side_effect(): void
-    {
-        $sideEffectA = Deletion::forEntityClass(
-            'Test',
-            [
-                EventEntityPropertyMapping::with(
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                )
-            ]
-        );
+	public function test_it_generates_listener_code_for_single_delete_side_effect(): void
+	{
+		$sideEffectA = Deletion::forEntityClass(
+			'Test',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				)
+			]
+		);
 
-        $expected = <<<php
+		$expected = <<<php
 <?php
 
 declare(strict_types=1);
@@ -197,56 +197,56 @@ class FooBar implements EventListener
 
 php;
 
-        $instruction = Instruction::new(
-            'foo bar',
-            Event::new(
-                'Test',
-                PropertyCollection::with([
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                ])
-            ),
-            [
-                $sideEffectA
-            ]
-        );
+		$instruction = Instruction::new(
+			'foo bar',
+			Event::new(
+				'Test',
+				PropertyCollection::with([
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				])
+			),
+			[
+				$sideEffectA
+			]
+		);
 
-        $code = $this->listenerGenerator->generate($instruction);
+		$code = $this->listenerGenerator->generate($instruction);
 
-        $this->assertEquals($expected, $code);
-    }
+		$this->assertEquals($expected, $code);
+	}
 
-    public function test_it_generates_listener_code_for_multiple_side_effects(): void
-    {
-        $sideEffectA = Creation::forEntityClass(
-            'CreationEntity',
-            [
-                EventEntityPropertyMapping::with(
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                )
-            ]
-        );
-        $sideEffectB = Update::forEntityClass(
-            'UpdateEntity',
-            [
-                EventEntityPropertyMapping::with(
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                )
-            ]
-        );
-        $sideEffectC = Deletion::forEntityClass(
-            'DeleteEntity',
-            [
-                EventEntityPropertyMapping::with(
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                )
-            ]
-        );
+	public function test_it_generates_listener_code_for_multiple_side_effects(): void
+	{
+		$sideEffectA = Creation::forEntityClass(
+			'CreationEntity',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				)
+			]
+		);
+		$sideEffectB = Update::forEntityClass(
+			'UpdateEntity',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				)
+			]
+		);
+		$sideEffectC = Deletion::forEntityClass(
+			'DeleteEntity',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				)
+			]
+		);
 
-        $expected = <<<php
+		$expected = <<<php
 <?php
 
 declare(strict_types=1);
@@ -299,24 +299,24 @@ class FooBar implements EventListener
 
 php;
 
-        $instruction = Instruction::new(
-            'foo bar',
-            Event::new(
-                'Test',
-                PropertyCollection::with([
-                    Property::new('foo', 'string'),
-                    Property::new('bar', 'string'),
-                ])
-            ),
-            [
-                $sideEffectA,
-                $sideEffectB,
-                $sideEffectC,
-            ]
-        );
+		$instruction = Instruction::new(
+			'foo bar',
+			Event::new(
+				'Test',
+				PropertyCollection::with([
+					Property::new('foo', 'string'),
+					Property::new('bar', 'string'),
+				])
+			),
+			[
+				$sideEffectA,
+				$sideEffectB,
+				$sideEffectC,
+			]
+		);
 
-        $code = $this->listenerGenerator->generate($instruction);
+		$code = $this->listenerGenerator->generate($instruction);
 
-        $this->assertEquals($expected, $code);
-    }
+		$this->assertEquals($expected, $code);
+	}
 }

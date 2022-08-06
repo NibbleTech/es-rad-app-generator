@@ -22,7 +22,8 @@ final class Entity
 
 	public static function new(
 		string $class,
-		/* @deprecated */ PropertyCollection $properties = null
+		/* @deprecated */ 
+		PropertyCollection $properties = null
 	): Entity {
 		$self = new self();
 

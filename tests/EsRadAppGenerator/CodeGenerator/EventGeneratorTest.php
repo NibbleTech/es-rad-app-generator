@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
@@ -10,16 +11,16 @@ use PHPUnit\Framework\TestCase;
 
 class EventGeneratorTest extends TestCase
 {
-    private EventGenerator $eventGenerator;
-    
-    protected function setUp(): void
-    {
-        $this->eventGenerator = new EventGenerator();
-    }
+	private EventGenerator $eventGenerator;
 
-    function test_it_generates_code_for_event(): void
-    {
-        $expected = <<<php
+	protected function setUp(): void
+	{
+		$this->eventGenerator = new EventGenerator();
+	}
+
+	public function test_it_generates_code_for_event(): void
+	{
+		$expected = <<<php
 <?php
 
 declare(strict_types=1);
@@ -36,17 +37,16 @@ class Test implements Event
 
 php;
 
-        $event = Event::new(
-            'Test',
-            PropertyCollection::with([
-                Property::new('foo', 'int'),
-                Property::new('bar', 'string'),
-            ])
-        );
+		$event = Event::new(
+			'Test',
+			PropertyCollection::with([
+				Property::new('foo', 'int'),
+				Property::new('bar', 'string'),
+			])
+		);
 
-        $code = $this->eventGenerator->generate($event);
+		$code = $this->eventGenerator->generate($event);
 
-        $this->assertEquals($expected, $code);
-
-    }
+		$this->assertEquals($expected, $code);
+	}
 }
