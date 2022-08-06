@@ -6,38 +6,38 @@ namespace NibbleTech\EsRadAppGenerator\Components;
 
 final class Property
 {
-    private string $name;
-    private string $type;
+	private string $name;
+	private string $type;
 
-    private function __construct()
-    {
-    }
+	private function __construct()
+	{
+	}
 
-    public static function new(
-        string $name,
-        string $type
-    ): Property {
-        $self = new self();
+	public static function new(
+		string $name,
+		string $type
+	): Property {
+		$self = new self();
 
-        $self->name = $name;
-        $self->type = $type;
+		$self->name = $name;
+		$self->type = $type;
 
-        return $self;
-    }
+		return $self;
+	}
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+	public function getName(): string
+	{
+		return $this->name;
+	}
 
-    public function getType(): string
-    {
-        return $this->type;
-    }
+	public function getType(): string
+	{
+		return $this->type;
+	}
 
-    public function sameAs(Property $property): bool
-    {
-        return $property->getName() === $this->getName()
-            && $property->getType() === $property->getType();
-    }
+	public function sameAs(Property $property): bool
+	{
+		return $property->getName() === $this->getName()
+			&& $property->getType() === $property->getType();
+	}
 }

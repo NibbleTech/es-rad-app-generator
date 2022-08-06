@@ -23,194 +23,194 @@ use NibbleTech\EsRadAppGenerator\Components\Instruction;
 
 final class AppBuilder
 {
-    private string $buildDir;
-    private InstructionProvider $instructionProvider;
-    private EventGenerator $eventGenerator;
-    private EntityGenerator $entityGenerator;
-    private RepositoryGenerator $repoGenerator;
-    /**
-     * @var Instruction[]
-     */
-    private array $instructions = [];
-    /**
-     * @var array<string, Event>
-     */
-    private array $globalEvents = [];
-    /**
-     * @var array<string, Entity>
-     */
-    private array $globalEntities = [];
+	private string $buildDir;
+	private InstructionProvider $instructionProvider;
+	private EventGenerator $eventGenerator;
+	private EntityGenerator $entityGenerator;
+	private RepositoryGenerator $repoGenerator;
+	/**
+	 * @var Instruction[]
+	 */
+	private array $instructions = [];
+	/**
+	 * @var array<string, Event>
+	 */
+	private array $globalEvents = [];
+	/**
+	 * @var array<string, Entity>
+	 */
+	private array $globalEntities = [];
 
-    final public function __construct(
-        string $buildDir,
-        InstructionProvider $instructionProvider
-    ) {
-        $this->buildDir        = $buildDir;
-        $this->instructionProvider = $instructionProvider;
-        $this->eventGenerator  = new EventGenerator();
-        $this->entityGenerator = new EntityGenerator();
-        $this->repoGenerator   = new RepositoryGenerator();
-    }
+	final public function __construct(
+		string $buildDir,
+		InstructionProvider $instructionProvider
+	) {
+		$this->buildDir        = $buildDir;
+		$this->instructionProvider = $instructionProvider;
+		$this->eventGenerator  = new EventGenerator();
+		$this->entityGenerator = new EntityGenerator();
+		$this->repoGenerator   = new RepositoryGenerator();
+	}
 
-    public function build(): void
-    {
-        $this->clearBuildDirectory();
+	public function build(): void
+	{
+		$this->clearBuildDirectory();
 
-        $instructions = $this->instructionProvider->provideInstructions();
+		$instructions = $this->instructionProvider->provideInstructions();
 
-        /**
-         * @TODO Need something that can take Event classes and compile all possible properties.
-         */
+		/**
+		 * @TODO Need something that can take Event classes and compile all possible properties.
+		 */
 
-        $this->generateCommonClasses();
+		$this->generateCommonClasses();
 
-        $this->compileGlobals($instructions);
+		$this->compileGlobals($instructions);
 
-        $this->generateEvents();
+		$this->generateEvents();
 
-        $this->generateEntities();
+		$this->generateEntities();
 
-        foreach ($this->instructions as $instruction) {
-            $this->generateListeners($instruction);
-        }
-    }
+		foreach ($this->instructions as $instruction) {
+			$this->generateListeners($instruction);
+		}
+	}
 
-    private function clearBuildDirectory(): void
-    {
-        echo 'Clearing build dir' . PHP_EOL;
-        $dir = $this->buildDir;
-        $di  = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-        $ri  = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
-        /** @var SplFileInfo $file */
-        foreach ($ri as $file) {
-            $file->isDir() ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
-        }
-    }
+	private function clearBuildDirectory(): void
+	{
+		echo 'Clearing build dir' . PHP_EOL;
+		$dir = $this->buildDir;
+		$di  = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+		$ri  = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
+		/** @var SplFileInfo $file */
+		foreach ($ri as $file) {
+			$file->isDir() ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
+		}
+	}
 
-    /**
-     * @param Instruction[] $instructions
-     *
-     * @return void
-     */
-    private function compileGlobals(array $instructions): void
-    {
-        foreach ($instructions as $instruction) {
-            $this->addEventToGlobalList($instruction->getEvent());
-            foreach ($instruction->getEntities() as $entity) {
-                $this->addEntityToGlobalList($entity);
-            }
-        }
-    }
+	/**
+	 * @param Instruction[] $instructions
+	 *
+	 * @return void
+	 */
+	private function compileGlobals(array $instructions): void
+	{
+		foreach ($instructions as $instruction) {
+			$this->addEventToGlobalList($instruction->getEvent());
+			foreach ($instruction->getEntities() as $entity) {
+				$this->addEntityToGlobalList($entity);
+			}
+		}
+	}
 
-    private function generateCommonClasses(): void
-    {
-        echo 'Generating Common files ' . PHP_EOL;
+	private function generateCommonClasses(): void
+	{
+		echo 'Generating Common files ' . PHP_EOL;
 
-        $commonDir = $this->buildDir . '/Common/';
+		$commonDir = $this->buildDir . '/Common/';
 
-        if (!is_dir($commonDir)) {
-            mkdir($commonDir);
-        }
+		if (!is_dir($commonDir)) {
+			mkdir($commonDir);
+		}
 
-        $eventInterfaceGenerator = new EventInterfaceGenerator();
+		$eventInterfaceGenerator = new EventInterfaceGenerator();
 
-        file_put_contents($commonDir . 'Event.php', $eventInterfaceGenerator->generate());
+		file_put_contents($commonDir . 'Event.php', $eventInterfaceGenerator->generate());
 
-        $eventListenerInterfaceGenerator = new EventListenerInterfaceGenerator();
+		$eventListenerInterfaceGenerator = new EventListenerInterfaceGenerator();
 
-        file_put_contents($commonDir . 'EventListener.php', $eventListenerInterfaceGenerator->generate());
+		file_put_contents($commonDir . 'EventListener.php', $eventListenerInterfaceGenerator->generate());
 
-        $entityInterfaceGenerator = new EntityInterfaceGenerator();
+		$entityInterfaceGenerator = new EntityInterfaceGenerator();
 
-        file_put_contents($commonDir . 'Entity.php', $entityInterfaceGenerator->generate());
-    }
+		file_put_contents($commonDir . 'Entity.php', $entityInterfaceGenerator->generate());
+	}
 
-    private function generateEvents(): void
-    {
-        $eventsDir = $this->buildDir . '/Events/';
+	private function generateEvents(): void
+	{
+		$eventsDir = $this->buildDir . '/Events/';
 
-        if (!is_dir($eventsDir)) {
-            mkdir($eventsDir);
-        }
+		if (!is_dir($eventsDir)) {
+			mkdir($eventsDir);
+		}
 
-        foreach ($this->globalEvents as $globalEvent) {
-            $eventCode = $this->eventGenerator->generate($globalEvent);
-            $eventPath = $globalEvent->getClass() . '.php';
+		foreach ($this->globalEvents as $globalEvent) {
+			$eventCode = $this->eventGenerator->generate($globalEvent);
+			$eventPath = $globalEvent->getClass() . '.php';
 
-            echo 'Generating Event ' . $globalEvent->getClass() . PHP_EOL;
+			echo 'Generating Event ' . $globalEvent->getClass() . PHP_EOL;
 
-            file_put_contents($eventsDir . $eventPath, $eventCode);
-        }
-    }
+			file_put_contents($eventsDir . $eventPath, $eventCode);
+		}
+	}
 
-    private function generateEntities(): void
-    {
-        $entityDir = $this->buildDir . '/Entities/';
-        $repoDir   = $this->buildDir . '/Repositories/';
+	private function generateEntities(): void
+	{
+		$entityDir = $this->buildDir . '/Entities/';
+		$repoDir   = $this->buildDir . '/Repositories/';
 
-        if (!is_dir($entityDir)) {
-            mkdir($entityDir);
-        }
-        if (!is_dir($repoDir)) {
-            mkdir($repoDir);
-        }
+		if (!is_dir($entityDir)) {
+			mkdir($entityDir);
+		}
+		if (!is_dir($repoDir)) {
+			mkdir($repoDir);
+		}
 
-        foreach ($this->globalEntities as $globalEntity) {
-            $entityCode = $this->entityGenerator->generate($globalEntity);
-            $entityPath = $globalEntity->getClass() . '.php';
+		foreach ($this->globalEntities as $globalEntity) {
+			$entityCode = $this->entityGenerator->generate($globalEntity);
+			$entityPath = $globalEntity->getClass() . '.php';
 
-            echo 'Generating Entity ' . $globalEntity->getClass() . PHP_EOL;
+			echo 'Generating Entity ' . $globalEntity->getClass() . PHP_EOL;
 
-            file_put_contents($entityDir . $entityPath, $entityCode);
+			file_put_contents($entityDir . $entityPath, $entityCode);
 
-            echo 'Generating Entity Repository for' . $globalEntity->getClass() . PHP_EOL;
+			echo 'Generating Entity Repository for' . $globalEntity->getClass() . PHP_EOL;
 
-            $repoCode = $this->repoGenerator->generate($globalEntity);
-            $repoPath = $globalEntity->getClass() . 'Repository' . '.php';
+			$repoCode = $this->repoGenerator->generate($globalEntity);
+			$repoPath = $globalEntity->getClass() . 'Repository' . '.php';
 
-            file_put_contents($repoDir . $repoPath, $repoCode);
-        }
-    }
+			file_put_contents($repoDir . $repoPath, $repoCode);
+		}
+	}
 
-    private function addEventToGlobalList(Event $newEvent): void
-    {
-        $event = $this->globalEvents[$newEvent->getClass()] ?? $newEvent;
+	private function addEventToGlobalList(Event $newEvent): void
+	{
+		$event = $this->globalEvents[$newEvent->getClass()] ?? $newEvent;
 
-        if ($event !== $newEvent) {
-            $event->merge($newEvent);
-        }
+		if ($event !== $newEvent) {
+			$event->merge($newEvent);
+		}
 
-        $this->globalEvents[$event->getClass()] = $event;
-    }
+		$this->globalEvents[$event->getClass()] = $event;
+	}
 
-    private function addEntityToGlobalList(Entity $newEntity): void
-    {
-        $entity = $this->globalEntities[$newEntity->getClass()] ?? $newEntity;
+	private function addEntityToGlobalList(Entity $newEntity): void
+	{
+		$entity = $this->globalEntities[$newEntity->getClass()] ?? $newEntity;
 
-        if ($entity !== $newEntity) {
-            $entity->merge($newEntity);
-        }
+		if ($entity !== $newEntity) {
+			$entity->merge($newEntity);
+		}
 
-        $this->globalEntities[$entity->getClass()] = $entity;
-    }
+		$this->globalEntities[$entity->getClass()] = $entity;
+	}
 
-    private function generateListeners(Instruction $instruction): void
-    {
-        $listenerDir = $this->buildDir . '/Listeners/';
+	private function generateListeners(Instruction $instruction): void
+	{
+		$listenerDir = $this->buildDir . '/Listeners/';
 
-        if (!is_dir($listenerDir)) {
-            mkdir($listenerDir);
-        }
+		if (!is_dir($listenerDir)) {
+			mkdir($listenerDir);
+		}
 
-        $listenerGenerator = new ListenerGenerator(
-            new SideEffectCrudCodeGenerator()
-        );
+		$listenerGenerator = new ListenerGenerator(
+			new SideEffectCrudCodeGenerator()
+		);
 
-        echo 'Generating Listener ' . $instruction->getListenerName() . PHP_EOL;
+		echo 'Generating Listener ' . $instruction->getListenerName() . PHP_EOL;
 
-        file_put_contents(
-            $listenerDir . $instruction->getListenerName() . '.php',
-            $listenerGenerator->generate($instruction)
-        );
-    }
+		file_put_contents(
+			$listenerDir . $instruction->getListenerName() . '.php',
+			$listenerGenerator->generate($instruction)
+		);
+	}
 }

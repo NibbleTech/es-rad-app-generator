@@ -8,10 +8,10 @@ use SimpleXMLElement;
 
 interface XmlProvider
 {
-    /**
-     * Do we need this step? Generation can just happen when we get it.
-     *
-     * Do we need the generation as a separate step for potential cache-ability?
-     */
-    public function provideSimpleXml(): SimpleXMLElement;
+	/**
+	 * Do we need this step? Generation can just happen when we get it.
+	 *
+	 * Do we need the generation as a separate step for potential cache-ability?
+	 */
+	public function provideSimpleXml(): SimpleXMLElement;
 }

@@ -9,19 +9,19 @@ use SimpleXMLElement;
 
 class NativeXML implements XmlProvider
 {
-    public function __construct(
-        private string $pathToXmlFile
-    ) {
-    }
+	public function __construct(
+		private string $pathToXmlFile
+	) {
+	}
 
-    public function provideSimpleXml(): SimpleXMLElement
-    {
-        $simpleXml = simplexml_load_file($this->pathToXmlFile);
+	public function provideSimpleXml(): SimpleXMLElement
+	{
+		$simpleXml = simplexml_load_file($this->pathToXmlFile);
 
-        if ($simpleXml === false) {
-            throw new RuntimeException("XML file failed to load.");
-        }
+		if ($simpleXml === false) {
+			throw new RuntimeException("XML file failed to load.");
+		}
 
-        return $simpleXml;
-    }
+		return $simpleXml;
+	}
 }

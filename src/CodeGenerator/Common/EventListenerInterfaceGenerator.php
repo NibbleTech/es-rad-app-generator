@@ -9,28 +9,28 @@ use Nette\PhpGenerator\PhpFile;
 
 final class EventListenerInterfaceGenerator
 {
-    final public function __construct()
-    {
-    }
+	final public function __construct()
+	{
+	}
 
-    public function generate(): string
-    {
-        $file = new PhpFile();
-        $file
-            ->setStrictTypes();
+	public function generate(): string
+	{
+		$file = new PhpFile();
+		$file
+			->setStrictTypes();
 
-        $namespace = $file->addNamespace('App\Common');
+		$namespace = $file->addNamespace('App\Common');
 
-        $class = $namespace->addInterface('EventListener');
+		$class = $namespace->addInterface('EventListener');
 
-        $handleMethod = $class
-            ->addMethod('handle')
-            ->setReturnType('void');
+		$handleMethod = $class
+			->addMethod('handle')
+			->setReturnType('void');
 
-        $handleMethod
-            ->addParameter('event')
-            ->setType('App\Common\Event');
+		$handleMethod
+			->addParameter('event')
+			->setType('App\Common\Event');
 
-        return (new CustomNettePrinter())->printFile($file);
-    }
+		return (new CustomNettePrinter())->printFile($file);
+	}
 }

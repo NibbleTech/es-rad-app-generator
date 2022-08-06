@@ -11,33 +11,33 @@ use Nette\PhpGenerator\PhpNamespace;
 
 final class EventGenerator
 {
-    final public function __construct()
-    {
-    }
+	final public function __construct()
+	{
+	}
 
-    public function generate(Event $event): string
-    {
-        $file = new PhpFile();
-        $file
-            ->setStrictTypes();
+	public function generate(Event $event): string
+	{
+		$file = new PhpFile();
+		$file
+			->setStrictTypes();
 
-        $namespace = $file->addNamespace('App\Events');
+		$namespace = $file->addNamespace('App\Events');
 
-        $namespace->addUse("App\Common\Event");
+		$namespace->addUse("App\Common\Event");
 
-        $class = $namespace->addClass($event->getClass());
+		$class = $namespace->addClass($event->getClass());
 
-        $class
-            ->addImplement("App\Common\Event");
+		$class
+			->addImplement("App\Common\Event");
 
-        foreach ($event->getProperties()->getProperties() as $property) {
-            $class->addProperty(
-                $property->getName()
-            )->setType(
-                $property->getType()
-            );
-        }
+		foreach ($event->getProperties()->getProperties() as $property) {
+			$class->addProperty(
+				$property->getName()
+			)->setType(
+				$property->getType()
+			);
+		}
 
-        return (new CustomNettePrinter())->printFile($file);
-    }
+		return (new CustomNettePrinter())->printFile($file);
+	}
 }
