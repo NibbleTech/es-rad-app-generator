@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace NibbleTech\EsRadAppGenerator\Components;
 
 use InvalidArgumentException;
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\SideEffect;
 
 final class Entity
 {
 	private string $class;
 	private PropertyCollection $properties;
+	/**
+	 * @var Event[]
+	 */
+	private array $appliesEvents = [];
 
 	private function __construct()
 	{
@@ -17,14 +22,46 @@ final class Entity
 
 	public static function new(
 		string $class,
-		PropertyCollection $properties
+		/* @deprecated */ PropertyCollection $properties = null
 	): Entity {
 		$self = new self();
 
-		$self->class = $class;
-		$self->properties = $properties;
+		$self->class      = $class;
+		$self->properties = $properties ?? PropertyCollection::with([]);
 
 		return $self;
+	}
+
+	/**
+	 * @param Event        $event
+	 * @param SideEffect[] $sideEffects
+	 *
+	 * @return $this
+	 */
+	public function appliesEvent(
+		Event $event,
+		array $sideEffects = []
+	): self {
+		$this->appliesEvents[] = $event;
+		foreach ($sideEffects as $sideEffect) {
+			$this->properties = $this->calculatePropertiesFromSideEffects($sideEffect);
+		}
+
+		return $this;
+	}
+
+	private function calculatePropertiesFromSideEffects(SideEffect $sideEffect): PropertyCollection
+	{
+		$propertyCollection = clone $this->properties;
+
+		foreach ($sideEffect->getPropertyMappings() as $propertyMapping) {
+			$propertyCollection->addProperty($propertyMapping->getEntityProperty());
+			/**
+			 * @TODO add try catch here once addProperty uses custom exception for conflicting property types
+			 */
+		}
+
+		return $propertyCollection;
 	}
 
 	public function merge(Entity $entity): void
@@ -44,5 +81,10 @@ final class Entity
 	public function getProperties(): PropertyCollection
 	{
 		return $this->properties;
+	}
+
+	public function getAppliesEvents(): array
+	{
+		return $this->appliesEvents;
 	}
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NibbleTech\EsRadAppGenerator\Components;
 
+use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
 use PHPUnit\Framework\TestCase;
 
 class EntityTest extends TestCase
@@ -33,7 +34,7 @@ class EntityTest extends TestCase
         );
 
         $entityA->merge($entityB);
-        
+
         $this->assertEquals($entityAExpected, $entityA);
     }
 
@@ -54,4 +55,48 @@ class EntityTest extends TestCase
 
         $entityA->merge($entityB);
     }
+
+	function test_it_records_event_to_apply_correctly()
+	{
+	    $event = Event::new('Foo');
+
+		$entity = Entity::new('Entity');
+
+		$entity->appliesEvent($event);
+
+		$this->assertEquals(
+			[$event],
+			$entity->getAppliesEvents(),
+		);
+	}
+
+	function test_it_adds_entity_properties_correctly_from_side_effect_of_applies_event()
+	{
+	    $event = Event::new('Foo');
+		$sideEffect = Creation::forEntityClass(
+			'Entity',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('eventFoo', 'string'),
+				)
+			]
+		);
+
+		$entity = Entity::new('Entity');
+
+		$entity->appliesEvent(
+			$event,
+			[
+				$sideEffect
+			]
+		);
+
+		$properties = $entity->getProperties();
+
+		$this->assertTrue(
+			$properties->hasProperty('foo')
+		);
+
+	}
 }
