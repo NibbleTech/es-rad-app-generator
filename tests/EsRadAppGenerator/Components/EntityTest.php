@@ -66,7 +66,7 @@ class EntityTest extends TestCase
 		$entity->appliesEvent($event);
 
 		$this->assertEquals(
-			[$event],
+			["Foo" => $event],
 			$entity->getAppliesEvents(),
 		);
 	}
@@ -97,6 +97,38 @@ class EntityTest extends TestCase
 
 		$this->assertTrue(
 			$properties->hasProperty('foo')
+		);
+	}
+
+	public function test_it_throws_exception_when_trying_to_record_duplicate_event_class_in_applies_events()
+	{
+		$event = Event::new('Foo');
+		$sideEffect = Creation::forEntityClass(
+			'Entity',
+			[
+				EventEntityPropertyMapping::with(
+					Property::new('foo', 'string'),
+					Property::new('eventFoo', 'string'),
+				)
+			]
+		);
+
+		$entity = Entity::new('Entity');
+
+		$entity->appliesEvent(
+			$event,
+			[
+				$sideEffect
+			]
+		);
+
+		$this->expectException(\InvalidArgumentException::class);
+
+		$entity->appliesEvent(
+			$event,
+			[
+				$sideEffect
+			]
 		);
 	}
 }

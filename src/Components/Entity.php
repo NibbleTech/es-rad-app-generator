@@ -43,7 +43,10 @@ final class Entity
 		Event $event,
 		array $sideEffects = []
 	): self {
-		$this->appliesEvents[] = $event;
+		if (!empty($this->appliesEvents[$event->getClass()])) {
+			throw new InvalidArgumentException("Event already in applies list.");
+		}
+		$this->appliesEvents[$event->getClass()] = $event;
 		foreach ($sideEffects as $sideEffect) {
 			$this->properties = $this->calculatePropertiesFromSideEffects($sideEffect);
 		}
