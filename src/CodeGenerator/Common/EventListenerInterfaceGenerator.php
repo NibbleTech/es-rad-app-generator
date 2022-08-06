@@ -23,10 +23,6 @@ final class EventListenerInterfaceGenerator
 
         $class = $namespace->addInterface('EventListener');
 
-        $class
-            ->addMethod('handle')
-            ->setPublic();
-
         $handleMethod = $class
             ->addMethod('handle')
             ->setReturnType('void');
