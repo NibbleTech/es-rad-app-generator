@@ -41,10 +41,10 @@ class InstructionProvider
 		/** @var EventConsumption[] $instructions */
 		$instructions = [];
 
-		/** @var SimpleXMLElement $events */
-		$events = $xml->events;
+		/** @var SimpleXMLElement $eventConsumers */
+		$eventConsumers = $xml->eventConsumers;
 
-		foreach ($events->children() as $when) {
+		foreach ($eventConsumers->children() as $when) {
 			$instructions[] = $this->generateInstructionFromXmlElement($when);
 		}
 
