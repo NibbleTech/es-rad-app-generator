@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace NibbleTech\EsRadAppGenerator\InstructionProviders;
 
+use NibbleTech\EsRadAppGenerator\Components\Entity;
 use NibbleTech\EsRadAppGenerator\Configuration\XmlProviders\XmlProvider;
 use NibbleTech\EsRadAppGenerator\Components\Event;
 use NibbleTech\EsRadAppGenerator\Components\EventEntityPropertyMapping;
@@ -14,6 +15,8 @@ use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Deletion;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\SideEffect;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Update;
+use NibbleTech\EsRadAppGenerator\Domain;
+use NibbleTech\EsRadAppGenerator\DomainBuilder;
 use RuntimeException;
 use SimpleXMLElement;
 
@@ -27,10 +30,7 @@ class InstructionProvider
 		$this->xmlProvider = $xmlProvider;
 	}
 
-	/**
-	 * @return EventConsumption[]
-	 */
-	public function provideInstructions(): array
+	public function compileDomain(): Domain
 	{
 		$xml = $this->xmlProvider->provideSimpleXml();
 
@@ -38,21 +38,29 @@ class InstructionProvider
 		 * @TODO validate XML against XSD
 		 */
 
-		/** @var EventConsumption[] $instructions */
-		$instructions = [];
+		$domainBuilder = new DomainBuilder();
 
 		/** @var SimpleXMLElement $eventConsumers */
 		$eventConsumers = $xml->eventConsumers;
 
 		foreach ($eventConsumers->children() as $when) {
-			$instructions[] = $this->generateInstructionFromXmlElement($when);
+			$this->generateEventConsumptionFromXmlElement($when, $domainBuilder);
 		}
 
-		return $instructions;
+		/** @var SimpleXMLElement $events */
+		$events = $xml->events;
+
+		foreach ($events->children() as $event) {
+			$this->generateEventFromXmlElement($event, $domainBuilder);
+		}
+
+		return $domainBuilder->getImmutableDomain();
 	}
 
-	private function generateInstructionFromXmlElement(SimpleXMLElement $when): EventConsumption
-	{
+	private function generateEventConsumptionFromXmlElement(
+		SimpleXMLElement $when,
+		DomainBuilder $domainBuilder
+	): void {
 		$eventProperties = PropertyCollection::with([]);
 
 		$sideEffects = [];
@@ -66,7 +74,7 @@ class InstructionProvider
 			);
 		}
 
-		$instruction = EventConsumption::new(
+		$eventConsumption = EventConsumption::new(
 			(string) $when->attributes()->description,
 			Event::new(
 				(string) $when->attributes()->eventName,
@@ -75,7 +83,24 @@ class InstructionProvider
 			$sideEffects
 		);
 
-		return $instruction;
+		$domainBuilder->addEventConsumer($eventConsumption);
+	}
+
+	private function generateEventFromXmlElement(
+		SimpleXMLElement $eventXml,
+		DomainBuilder $domainBuilder
+	): void {
+		$entity = Entity::new(
+			(string) $eventXml->attributes()->appliesTo
+		);
+
+		$domainBuilder->addEntity($entity);
+
+		$event = Event::new(
+			(string) $eventXml->attributes()->name
+		);
+
+		$domainBuilder->addEvent($event);
 	}
 
 	private function generateSideEffectFromXml(

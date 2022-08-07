@@ -56,7 +56,7 @@ final class AppBuilder
 	{
 		$this->clearBuildDirectory();
 
-		$instructions = $this->instructionProvider->provideInstructions();
+		$domain = $this->instructionProvider->compileDomain();
 
 		/**
 		 * @TODO Need something that can take Event classes and compile all possible properties.
@@ -64,7 +64,7 @@ final class AppBuilder
 
 		$this->generateCommonClasses();
 
-		$this->compileGlobals($instructions);
+		$this->compileGlobals($domain);
 
 		$this->generateEvents();
 
@@ -87,18 +87,14 @@ final class AppBuilder
 		}
 	}
 
-	/**
-	 * @param EventConsumption[] $instructions
-	 *
-	 * @return void
-	 */
-	private function compileGlobals(array $instructions): void
+	private function compileGlobals(Domain $domain): void
 	{
-		foreach ($instructions as $instruction) {
-			$this->addEventToGlobalList($instruction->getEvent());
-			foreach ($instruction->getEntities() as $entity) {
-				$this->addEntityToGlobalList($entity);
-			}
+		foreach ($domain->getEvents() as $event) {
+			$this->addEventToGlobalList($event);
+		}
+
+		foreach ($domain->getEntities() as $entity) {
+			$this->addEntityToGlobalList($entity);
 		}
 	}
 

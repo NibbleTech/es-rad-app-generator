@@ -37,8 +37,8 @@ class NativeXMLInstructionProviderTest extends TestCase
 
 	public function test_it_produces_correct_instructions(): void
 	{
-		$instructions = $this->instructionProvider->provideInstructions();
+		$domain = $this->instructionProvider->compileDomain();
 
-		$this->assertInstructionsMatchExpectedDemo($instructions);
+		$this->assertDomainMatchExpectedDemo($domain);
 	}
 }

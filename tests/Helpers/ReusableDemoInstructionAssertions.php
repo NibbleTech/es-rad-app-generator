@@ -13,31 +13,60 @@ use NibbleTech\EsRadAppGenerator\Components\PropertyCollection;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Deletion;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Update;
+use NibbleTech\EsRadAppGenerator\Domain;
 
 /**
  * @TODO want to make this a built in PHPUnit assertion for better
  */
 trait ReusableDemoInstructionAssertions
 {
-	/**
-	 * @param \NibbleTech\EsRadAppGenerator\Components\EventConsumption[] $instructions
-	 *
-	 * @return void
-	 */
-	protected function assertInstructionsMatchExpectedDemo(array $instructions): void
+	protected function assertDomainMatchExpectedDemo(Domain $instructions): void
 	{
+		$expectedDomain = $this->expectedDemoInstructions();
 		$this->assertEqualsCanonicalizing(
-			$instructions,
-			$this->expectedDemoInstructions()
+			$expectedDomain->getEvents(),
+			$instructions->getEvents(),
+		);
+		$this->assertEqualsCanonicalizing(
+			$expectedDomain->getEntities(),
+			$instructions->getEntities(),
+		);
+		$this->assertEqualsCanonicalizing(
+			$expectedDomain->getEventConsumers(),
+			$instructions->getEventConsumers(),
 		);
 	}
 
 	/**
 	 * @return EventConsumption[]
 	 */
-	private function expectedDemoInstructions(): array
+	private function expectedDemoInstructions(): Domain
 	{
-		return [
+		$entities = [
+			Entity::new('Thing'),
+		];
+		$events = [
+			Event::new(
+				'ThingSent',
+				PropertyCollection::with([
+					Property::new('createEventProp1', 'string'),
+					Property::new('createEventProp2', 'int'),
+				])
+			),
+			Event::new(
+				'ThingUpdated',
+				PropertyCollection::with([
+					Property::new('updateEventProp1', 'string'),
+				])
+			),
+			Event::new(
+				'ThingDeleted',
+				PropertyCollection::with([
+					Property::new('deleteEventProp1', 'string'),
+				])
+			),
+		];
+		$eventConsumers = [
 			EventConsumption::new(
 				'Thing is sent',
 				Event::new(
@@ -104,5 +133,11 @@ trait ReusableDemoInstructionAssertions
 				]
 			),
 		];
+
+		return new Domain(
+			$events,
+			$entities,
+			$eventConsumers
+		);
 	}
 }
