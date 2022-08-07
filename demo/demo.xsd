@@ -55,7 +55,17 @@
   </xs:complexType>
   <xs:complexType name="esRadAppType">
     <xs:sequence>
+      <xs:element type="eventsType" name="events"/>
       <xs:element type="eventConsumerType" name="eventConsumers"/>
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eventsType">
+    <xs:sequence>
+      <xs:element type="eventType" name="event" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="eventType">
+    <xs:attribute type="xs:string" name="name" use="required"/>
+    <xs:attribute type="xs:string" name="appliesTo" use="required"/>
   </xs:complexType>
 </xs:schema>

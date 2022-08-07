@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <esRadApp
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="demo.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="demo.xsd"
 >
+    <events>
+        <event name="ThingSent" appliesTo="Thing" />
+    </events>
     <eventConsumers>
         <when description="Thing is sent" eventName="ThingSent">
             <sideEffects>
