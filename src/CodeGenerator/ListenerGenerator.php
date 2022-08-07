@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
-use NibbleTech\EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\Components\EventConsumption;
 use Nette\PhpGenerator\PhpFile;
 
 final class ListenerGenerator
@@ -17,7 +17,7 @@ final class ListenerGenerator
 		$this->sideEffectCrudCodeGenerator = $sideEffectCrudCodeGenerator;
 	}
 
-	public function generate(Instruction $instruction): string
+	public function generate(EventConsumption $instruction): string
 	{
 		$file = new PhpFile();
 		$file

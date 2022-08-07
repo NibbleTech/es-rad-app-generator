@@ -6,7 +6,7 @@ namespace NibbleTech\EsRadAppGenerator\CodeGenerator;
 
 use NibbleTech\EsRadAppGenerator\Components\Event;
 use NibbleTech\EsRadAppGenerator\Components\EventEntityPropertyMapping;
-use NibbleTech\EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\Components\EventConsumption;
 use NibbleTech\EsRadAppGenerator\Components\Property;
 use NibbleTech\EsRadAppGenerator\Components\PropertyCollection;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
@@ -70,7 +70,7 @@ class FooBar implements EventListener
 
 php;
 
-		$instruction = Instruction::new(
+		$instruction = EventConsumption::new(
 			'foo bar',
 			Event::new(
 				'Test',
@@ -134,7 +134,7 @@ class FooBar implements EventListener
 
 php;
 
-		$instruction = Instruction::new(
+		$instruction = EventConsumption::new(
 			'foo bar',
 			Event::new(
 				'Test',
@@ -197,7 +197,7 @@ class FooBar implements EventListener
 
 php;
 
-		$instruction = Instruction::new(
+		$instruction = EventConsumption::new(
 			'foo bar',
 			Event::new(
 				'Test',
@@ -299,7 +299,7 @@ class FooBar implements EventListener
 
 php;
 
-		$instruction = Instruction::new(
+		$instruction = EventConsumption::new(
 			'foo bar',
 			Event::new(
 				'Test',

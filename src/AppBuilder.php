@@ -19,7 +19,7 @@ use NibbleTech\EsRadAppGenerator\CodeGenerator\RepositoryGenerator;
 use NibbleTech\EsRadAppGenerator\CodeGenerator\SideEffectCrudCodeGenerator;
 use NibbleTech\EsRadAppGenerator\Components\Entity;
 use NibbleTech\EsRadAppGenerator\Components\Event;
-use NibbleTech\EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\Components\EventConsumption;
 
 final class AppBuilder
 {
@@ -29,7 +29,7 @@ final class AppBuilder
 	private EntityGenerator $entityGenerator;
 	private RepositoryGenerator $repoGenerator;
 	/**
-	 * @var Instruction[]
+	 * @var EventConsumption[]
 	 */
 	private array $instructions = [];
 	/**
@@ -88,7 +88,7 @@ final class AppBuilder
 	}
 
 	/**
-	 * @param Instruction[] $instructions
+	 * @param EventConsumption[] $instructions
 	 *
 	 * @return void
 	 */
@@ -194,7 +194,7 @@ final class AppBuilder
 		$this->globalEntities[$entity->getClass()] = $entity;
 	}
 
-	private function generateListeners(Instruction $instruction): void
+	private function generateListeners(EventConsumption $instruction): void
 	{
 		$listenerDir = $this->buildDir . '/Listeners/';
 

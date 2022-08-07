@@ -53,7 +53,7 @@ class InstructionTest extends TestCase
 			),
 		];
 
-		$instruction = Instruction::new(
+		$instruction = EventConsumption::new(
 			'Test thing',
 			$event,
 			$sideEffects

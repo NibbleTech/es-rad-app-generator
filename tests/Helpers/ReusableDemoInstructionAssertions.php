@@ -7,7 +7,7 @@ namespace NibbleTech\EsRadAppGenerator\TestHelpers;
 use NibbleTech\EsRadAppGenerator\Components\Entity;
 use NibbleTech\EsRadAppGenerator\Components\Event;
 use NibbleTech\EsRadAppGenerator\Components\EventEntityPropertyMapping;
-use NibbleTech\EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\Components\EventConsumption;
 use NibbleTech\EsRadAppGenerator\Components\Property;
 use NibbleTech\EsRadAppGenerator\Components\PropertyCollection;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
@@ -20,7 +20,7 @@ use NibbleTech\EsRadAppGenerator\Components\SideEffects\Update;
 trait ReusableDemoInstructionAssertions
 {
 	/**
-	 * @param \NibbleTech\EsRadAppGenerator\Components\Instruction[] $instructions
+	 * @param \NibbleTech\EsRadAppGenerator\Components\EventConsumption[] $instructions
 	 *
 	 * @return void
 	 */
@@ -33,12 +33,12 @@ trait ReusableDemoInstructionAssertions
 	}
 
 	/**
-	 * @return Instruction[]
+	 * @return EventConsumption[]
 	 */
 	private function expectedDemoInstructions(): array
 	{
 		return [
-			Instruction::new(
+			EventConsumption::new(
 				'Thing is sent',
 				Event::new(
 					'ThingSent',
@@ -63,7 +63,7 @@ trait ReusableDemoInstructionAssertions
 					),
 				]
 			),
-			Instruction::new(
+			EventConsumption::new(
 				'Thing is updated',
 				Event::new(
 					'ThingUpdated',
@@ -83,7 +83,7 @@ trait ReusableDemoInstructionAssertions
 					),
 				]
 			),
-			Instruction::new(
+			EventConsumption::new(
 				'Thing is deleted',
 				Event::new(
 					'ThingDeleted',

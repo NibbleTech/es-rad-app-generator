@@ -7,7 +7,7 @@ namespace NibbleTech\EsRadAppGenerator\InstructionProviders;
 use NibbleTech\EsRadAppGenerator\Configuration\XmlProviders\XmlProvider;
 use NibbleTech\EsRadAppGenerator\Components\Event;
 use NibbleTech\EsRadAppGenerator\Components\EventEntityPropertyMapping;
-use NibbleTech\EsRadAppGenerator\Components\Instruction;
+use NibbleTech\EsRadAppGenerator\Components\EventConsumption;
 use NibbleTech\EsRadAppGenerator\Components\Property;
 use NibbleTech\EsRadAppGenerator\Components\PropertyCollection;
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\Creation;
@@ -28,7 +28,7 @@ class InstructionProvider
 	}
 
 	/**
-	 * @return Instruction[]
+	 * @return EventConsumption[]
 	 */
 	public function provideInstructions(): array
 	{
@@ -38,7 +38,7 @@ class InstructionProvider
 		 * @TODO validate XML against XSD
 		 */
 
-		/** @var Instruction[] $instructions */
+		/** @var EventConsumption[] $instructions */
 		$instructions = [];
 
 		/** @var SimpleXMLElement $events */
@@ -51,7 +51,7 @@ class InstructionProvider
 		return $instructions;
 	}
 
-	private function generateInstructionFromXmlElement(SimpleXMLElement $when): Instruction
+	private function generateInstructionFromXmlElement(SimpleXMLElement $when): EventConsumption
 	{
 		$eventProperties = PropertyCollection::with([]);
 
@@ -66,7 +66,7 @@ class InstructionProvider
 			);
 		}
 
-		$instruction = Instruction::new(
+		$instruction = EventConsumption::new(
 			(string) $when->attributes()->description,
 			Event::new(
 				(string) $when->attributes()->eventName,

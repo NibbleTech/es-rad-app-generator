@@ -6,7 +6,11 @@ namespace NibbleTech\EsRadAppGenerator\Components;
 
 use NibbleTech\EsRadAppGenerator\Components\SideEffects\SideEffect;
 
-final class Instruction
+/**
+ * This describes a consumption of an event.
+ * Basically a single listener/consumer, that will do stuff.
+ */
+final class EventConsumption
 {
 	private string $name;
 	private Event $event;
@@ -30,7 +34,7 @@ final class Instruction
 		string $name,
 		Event $event,
 		array $sideEffects
-	): Instruction {
+	): EventConsumption {
 		$self = new self();
 
 		$self->name        = $name;
