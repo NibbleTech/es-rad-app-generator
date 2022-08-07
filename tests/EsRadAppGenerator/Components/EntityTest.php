@@ -57,7 +57,7 @@ class EntityTest extends TestCase
 		$entityA->merge($entityB);
 	}
 
-	public function test_it_records_event_to_apply_correctly()
+	public function test_it_records_event_to_apply_correctly(): void
 	{
 		$event = Event::new('Foo');
 
@@ -71,7 +71,7 @@ class EntityTest extends TestCase
 		);
 	}
 
-	public function test_it_adds_entity_properties_correctly_from_side_effect_of_applies_event()
+	public function test_it_adds_entity_properties_correctly_from_side_effect_of_applies_event(): void
 	{
 		$event = Event::new('Foo');
 		$sideEffect = Creation::forEntityClass(
@@ -100,7 +100,7 @@ class EntityTest extends TestCase
 		);
 	}
 
-	public function test_it_throws_exception_when_trying_to_record_duplicate_event_class_in_applies_events()
+	public function test_it_throws_exception_when_trying_to_record_duplicate_event_class_in_applies_events(): void
 	{
 		$event = Event::new('Foo');
 		$sideEffect = Creation::forEntityClass(
