@@ -68,13 +68,18 @@ final class Entity
 		return $propertyCollection;
 	}
 
-	public function merge(Entity $entity): void
+	public function merge(Entity $entity): Entity
 	{
 		if ($entity->getClass() !== $this->getClass()) {
 			throw new InvalidArgumentException("Trying to merge Entity set as different class.");
 		}
 
-		$this->properties->mergeProperties($entity->getProperties());
+		$newEntity = Entity::new(
+			$this->getClass(),
+			$this->getProperties()->mergeProperties($entity->getProperties())
+		);
+
+		return $newEntity;
 	}
 
 	public function getClass(): string

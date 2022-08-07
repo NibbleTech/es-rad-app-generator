@@ -27,13 +27,18 @@ final class Event
 		return $self;
 	}
 
-	public function merge(Event $event): void
+	public function merge(Event $event): Event
 	{
 		if ($event->getClass() !== $this->getClass()) {
 			throw new InvalidArgumentException("Trying to merge Event set as different class.");
 		}
 
-		$this->properties->mergeProperties($event->getProperties());
+		$newEvent = Event::new(
+			$this->getClass(),
+			$this->getProperties()->mergeProperties($event->getProperties())
+		);
+
+		return $newEvent;
 	}
 
 	public function getClass(): string

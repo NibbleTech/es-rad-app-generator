@@ -29,11 +29,15 @@ final class PropertyCollection
 		return $self;
 	}
 
-	public function mergeProperties(PropertyCollection $propertyCollection): void
+	public function mergeProperties(PropertyCollection $propertyCollection): PropertyCollection
 	{
+		$newCollection = clone $this;
+
 		foreach ($propertyCollection->getProperties() as $property) {
-			$this->addProperty($property);
+			$newCollection->addProperty($property);
 		}
+
+		return $newCollection;
 	}
 
 	/**

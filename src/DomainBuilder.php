@@ -19,20 +19,28 @@ final class DomainBuilder
 		private array $eventConsumers = [],
 	) {
 	}
-	
+
 	public function addEvent(Event $event): void
 	{
-	    $this->events[$event->getClass()] = $event;
+		if (isset($this->events[$event->getClass()])) {
+			$event = $event->merge($this->events[$event->getClass()]);
+		}
+
+		$this->events[$event->getClass()] = $event;
 	}
-	
+
 	public function addEntity(Entity $entity): void
 	{
-	    $this->entities[$entity->getClass()] = $entity;
+		if (isset($this->entities[$entity->getClass()])) {
+			$entity = $entity->merge($this->entities[$entity->getClass()]);
+		}
+
+		$this->entities[$entity->getClass()] = $entity;
 	}
 
 	public function addEventConsumer(EventConsumption $eventConsumption): void
 	{
-	    $this->eventConsumers[$eventConsumption->getListenerName()] = $eventConsumption;
+		$this->eventConsumers[$eventConsumption->getListenerName()] = $eventConsumption;
 	}
 
 	/**
